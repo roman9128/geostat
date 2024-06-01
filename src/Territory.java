@@ -44,14 +44,13 @@ public class Territory {
     }
 
     public Territory(String name, int level, TerritoryType type, Territory belongsToCountry,
-            Territory belongsToRegion, Territory belongsToMunicipal, Territory capital, boolean isCapital) {
+            Territory belongsToRegion, Territory belongsToMunicipal, boolean isCapital) {
         this.name = name;
         this.level = level;
         this.type = type;
         this.belongsToCountry = belongsToCountry;
         this.belongsToRegion = belongsToRegion;
         this.belongsToMunicipal = belongsToMunicipal;
-        this.capital = capital;
         this.isCapital = isCapital;
     }
 
@@ -146,8 +145,8 @@ public class Territory {
     @Override
     public String toString() {
         return "Territory [id=" + id + ", name=" + name + ", level=" + level + ", type=" + type + ", belongsToCountry="
-                + belongsToCountry + ", belongsToRegion=" + belongsToRegion + ", belongsToMunicipal="
-                + belongsToMunicipal + ", capital=" + capital + ", isCapital=" + isCapital + "]";
+                + belongsToCountry.getName() + ", belongsToRegion=" + belongsToRegion.getName() + ", belongsToMunicipal="
+                + belongsToMunicipal.getName() + ", isCapital=" + isCapital + "]";
     }
     
 }

@@ -1,7 +1,6 @@
 import java.util.HashMap;
-import java.util.Iterator;
 
-public class Map implements Iterable<Territory> {
+public class Map {
     private HashMap<String, Territory> map;
     // private UserData UserData1;
     // private UserData UserData2;
@@ -17,8 +16,7 @@ public class Map implements Iterable<Territory> {
         map.put(id, territory);
     }
 
-    @Override
-    public Iterator<Territory> iterator() {
-       return new TerritoryIterator(map);
+    public HashMap<String, Territory> getMap() {
+        return map;
     }
 }

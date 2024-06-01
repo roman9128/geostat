@@ -4,7 +4,7 @@ public class Main {
 
         Service service = new Service();
         
-        service.addTerritory("Верхличи", 5, TerritoryType.VillageSettlement, null, null, null, null, false);
+        service.addTerritory("Russia", 1, TerritoryType.Country, null, null, null, false);
         service.getList();
 
     }
