@@ -20,7 +20,6 @@ public class Service {
         StringBuilder builder = new StringBuilder();
         builder.append("Список: \n");
         for (HashMap.Entry<String, Territory> territory : map.getMap().entrySet()) {
-
             builder.append(territory.getValue());
             builder.append("\n");
         }

@@ -5,6 +5,7 @@ public class IDbuilder {
         builder.append(territory.getBelongsToCountry().getName(), 0, 3);
         builder.append(territory.getBelongsToRegion().getName(), 0, 3);
         builder.append(territory.getBelongsToMunicipal().getName(), 0, 3);
+        builder.append(territory.getName(), 0, 3);
         return builder.toString().toUpperCase();
     }
 

@@ -148,5 +148,4 @@ public class Territory {
                 + belongsToCountry.getName() + ", belongsToRegion=" + belongsToRegion.getName() + ", belongsToMunicipal="
                 + belongsToMunicipal.getName() + ", isCapital=" + isCapital + "]";
     }
-    
 }
