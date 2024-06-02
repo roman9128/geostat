@@ -1,4 +1,7 @@
+package model.territory;
 import java.util.HashMap;
+
+import model.user_data.UserData;
 
 public class Territory {
 
@@ -6,32 +9,30 @@ public class Territory {
     private String name;
     private int level;
     private TerritoryType type;
-    private Territory belongsToCountry;
-    private Territory belongsToRegion;
-    private Territory belongsToMunicipal;
     private Territory capital;
     private boolean isCapital;
     private HashMap<String, Territory> subunits;
-    
+
     private long square;
-    
+
+    @SuppressWarnings("unused")
     private UserData UserData1;
+    @SuppressWarnings("unused")
     private UserData UserData2;
+    @SuppressWarnings("unused")
     private UserData UserData3;
+    @SuppressWarnings("unused")
     private UserData UserData4;
+    @SuppressWarnings("unused")
     private UserData UserData5;
 
-    public Territory(String id, String name, int level, TerritoryType type, Territory belongsToCountry,
-            Territory belongsToRegion, Territory belongsToMunicipal, Territory capital, boolean isCapital,
+    public Territory(String id, String name, int level, TerritoryType type, Territory capital, boolean isCapital,
             HashMap<String, Territory> subunits, long square, UserData userData1, UserData userData2,
             UserData userData3, UserData userData4, UserData userData5) {
         this.id = id;
         this.name = name;
         this.level = level;
         this.type = type;
-        this.belongsToCountry = belongsToCountry;
-        this.belongsToRegion = belongsToRegion;
-        this.belongsToMunicipal = belongsToMunicipal;
         this.capital = capital;
         this.isCapital = isCapital;
         this.subunits = subunits;
@@ -43,14 +44,11 @@ public class Territory {
         UserData5 = userData5;
     }
 
-    public Territory(String name, int level, TerritoryType type, Territory belongsToCountry,
-            Territory belongsToRegion, Territory belongsToMunicipal, boolean isCapital) {
-        this.name = name;
+    public Territory(String id, int level, String name, TerritoryType type, boolean isCapital) {
+        this.id = id;
         this.level = level;
+        this.name = name;
         this.type = type;
-        this.belongsToCountry = belongsToCountry;
-        this.belongsToRegion = belongsToRegion;
-        this.belongsToMunicipal = belongsToMunicipal;
         this.isCapital = isCapital;
     }
 
@@ -84,30 +82,6 @@ public class Territory {
 
     public void setType(TerritoryType type) {
         this.type = type;
-    }
-
-    public Territory getBelongsToCountry() {
-        return belongsToCountry;
-    }
-
-    public void setBelongsToCountry(Territory belongsToCountry) {
-        this.belongsToCountry = belongsToCountry;
-    }
-
-    public Territory getBelongsToRegion() {
-        return belongsToRegion;
-    }
-
-    public void setBelongsToRegion(Territory belongsToRegion) {
-        this.belongsToRegion = belongsToRegion;
-    }
-
-    public Territory getBelongsToMunicipal() {
-        return belongsToMunicipal;
-    }
-
-    public void setBelongsToMunicipal(Territory belongsToMunicipal) {
-        this.belongsToMunicipal = belongsToMunicipal;
     }
 
     public Territory getCapital() {
@@ -144,8 +118,8 @@ public class Territory {
 
     @Override
     public String toString() {
-        return "Territory [id=" + id + ", name=" + name + ", level=" + level + ", type=" + type + ", belongsToCountry="
-                + belongsToCountry.getName() + ", belongsToRegion=" + belongsToRegion.getName() + ", belongsToMunicipal="
-                + belongsToMunicipal.getName() + ", isCapital=" + isCapital + "]";
+        return "Territory [id=" + id + ", name=" + name + ", level=" + level + ", type=" + type + ", capital=" + capital
+                + ", isCapital=" + isCapital + "]";
     }
+
 }

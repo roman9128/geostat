@@ -1,18 +1,20 @@
+package model;
 import java.util.HashMap;
+
+import model.map.Map;
+import model.territory.Territory;
+import model.territory.TerritoryType;
 
 public class Service {
     private Map map;
-    private IDbuilder idbuilder;
+
 
     public Service() {
         map = new Map();
-        idbuilder = new IDbuilder();
     }
 
-    public void addTerritory(String name, int level, TerritoryType type, Territory belongsToCountry, Territory belongsToRegion, Territory belongsToMunicipal, boolean isCapital) {
-        Territory territory = new Territory(name, level, type, belongsToCountry, belongsToRegion, belongsToMunicipal, isCapital);
-        String id = idbuilder.makeID(territory);
-        territory.setId(id);
+    public void addTerritory(String id, int level, String name, TerritoryType type, boolean isCapital) {
+        Territory territory = new Territory(id, level, name, type, isCapital);
         map.addToMap(id, territory);
     }
 
@@ -20,6 +22,7 @@ public class Service {
         StringBuilder builder = new StringBuilder();
         builder.append("Список: \n");
         for (HashMap.Entry<String, Territory> territory : map.getMap().entrySet()) {
+            builder.append(territory.getKey());
             builder.append(territory.getValue());
             builder.append("\n");
         }

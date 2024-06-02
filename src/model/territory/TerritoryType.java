@@ -1,3 +1,4 @@
+package model.territory;
 
 
 public enum TerritoryType {

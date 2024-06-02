@@ -1,4 +1,7 @@
+package model.map;
 import java.util.HashMap;
+
+import model.territory.Territory;
 
 public class Map {
     private HashMap<String, Territory> map;
