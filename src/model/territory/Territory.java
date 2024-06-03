@@ -118,8 +118,7 @@ public class Territory {
 
     @Override
     public String toString() {
-        return "Territory [id=" + id + ", name=" + name + ", level=" + level + ", type=" + type + ", capital=" + capital
-                + ", isCapital=" + isCapital + "]";
+        return "[id_" + id + ", name_" + name + ", level_" + level + ", type_" + type + ", isCapital_" + isCapital + "]";
     }
 
 }
