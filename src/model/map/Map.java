@@ -5,11 +5,6 @@ import model.territory.Territory;
 
 public class Map {
     private HashMap<String, Territory> map;
-    // private UserData UserData1;
-    // private UserData UserData2;
-    // private UserData UserData3;
-    // private UserData UserData4;
-    // private UserData UserData5;
 
     public Map() {
         map = new HashMap<String, Territory>();
@@ -21,5 +16,9 @@ public class Map {
 
     public HashMap<String, Territory> getMap() {
         return map;
+    }
+
+    public void setMap(HashMap<String, Territory> map) {
+        this.map.putAll(map);
     }
 }

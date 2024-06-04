@@ -5,7 +5,5 @@ public class Main {
 
         Service service = new Service();
         System.out.println(service.getList());
-        
-
     }
 }

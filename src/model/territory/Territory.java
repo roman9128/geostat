@@ -1,4 +1,5 @@
 package model.territory;
+
 import java.util.HashMap;
 
 import model.user_data.UserData;
@@ -9,7 +10,6 @@ public class Territory {
     private String name;
     private int level;
     private TerritoryType type;
-    private Territory capital;
     private boolean isCapital;
     private HashMap<String, Territory> subunits;
 
@@ -26,14 +26,13 @@ public class Territory {
     @SuppressWarnings("unused")
     private UserData UserData5;
 
-    public Territory(String id, String name, int level, TerritoryType type, Territory capital, boolean isCapital,
+    public Territory(String id, String name, int level, TerritoryType type, boolean isCapital,
             HashMap<String, Territory> subunits, long square, UserData userData1, UserData userData2,
             UserData userData3, UserData userData4, UserData userData5) {
         this.id = id;
         this.name = name;
         this.level = level;
         this.type = type;
-        this.capital = capital;
         this.isCapital = isCapital;
         this.subunits = subunits;
         this.square = square;
@@ -44,12 +43,10 @@ public class Territory {
         UserData5 = userData5;
     }
 
-    public Territory(String id, int level, String name, TerritoryType type, boolean isCapital) {
+    public Territory(String id, String name, TerritoryType type) {
         this.id = id;
-        this.level = level;
         this.name = name;
         this.type = type;
-        this.isCapital = isCapital;
     }
 
     public String getId() {
@@ -84,14 +81,6 @@ public class Territory {
         this.type = type;
     }
 
-    public Territory getCapital() {
-        return capital;
-    }
-
-    public void setCapital(Territory capital) {
-        this.capital = capital;
-    }
-
     public boolean isCapital() {
         return isCapital;
     }
@@ -118,7 +107,6 @@ public class Territory {
 
     @Override
     public String toString() {
-        return "[id_" + id + ", name_" + name + ", level_" + level + ", type_" + type + ", isCapital_" + isCapital + "]";
+        return "[id: " + id + ", name: " + name + ", type: " + type + "]";
     }
-
 }

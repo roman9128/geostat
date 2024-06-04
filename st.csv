@@ -1,4 +1,4 @@
-RUS;1;Russia;Country;0
-CHI;1;China;Country;0
-FRA;1;France;Country;0
-RUSMOS;2;Moscow;FederalCity;1
+id;name;TerritoryType
+RUS;Russia;Country
+CHI;China;Country
+FRA;France;Country
