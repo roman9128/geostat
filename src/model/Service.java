@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 import model.data_preparation.DataLoader;
+import model.data_preparation.MapOrganizer;
 import model.map.Map;
 import model.territory.Territory;
 
@@ -12,11 +13,19 @@ public class Service {
 
     public Service() {
         map = new Map();
-        fillTheMap(new File("st.csv"));
-        fillTheMap(new File("sts.csv"));
+        fillTheMap("st.csv");
+        fillTheMap("sts.csv");
+        fillTheMap("fd.csv");
+        organize(map);
     }
 
-    private void fillTheMap(File file) {
+    private Map organize(Map map) {
+        MapOrganizer mapOrganizer = new MapOrganizer(map);
+        return mapOrganizer.organize(map);
+    }
+
+    private void fillTheMap(String path) {
+        File file = new File(path);
         map.setMap(getMapFromFile(file));
     }
 
@@ -29,11 +38,10 @@ public class Service {
         StringBuilder builder = new StringBuilder();
         builder.append("Common list: \n");
         for (HashMap.Entry<String, Territory> territory : map.getMap().entrySet()) {
-            builder.append(territory.getKey());
-            builder.append(": ");
             builder.append(territory.getValue());
             builder.append("\n");
         }
         return builder.toString();
+        
     }
 }

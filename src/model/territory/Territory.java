@@ -1,6 +1,6 @@
 package model.territory;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 import model.user_data.UserData;
 
@@ -11,7 +11,7 @@ public class Territory {
     private int level;
     private TerritoryType type;
     private boolean isCapital;
-    private HashMap<String, Territory> subunits;
+    private HashSet<String> subunits;
 
     private long square;
 
@@ -27,7 +27,7 @@ public class Territory {
     private UserData UserData5;
 
     public Territory(String id, String name, int level, TerritoryType type, boolean isCapital,
-            HashMap<String, Territory> subunits, long square, UserData userData1, UserData userData2,
+            HashSet<String> subunits, long square, UserData userData1, UserData userData2,
             UserData userData3, UserData userData4, UserData userData5) {
         this.id = id;
         this.name = name;
@@ -89,11 +89,11 @@ public class Territory {
         this.isCapital = isCapital;
     }
 
-    public HashMap<String, Territory> getSubunits() {
+    public HashSet<String> getSubunits() {
         return subunits;
     }
 
-    public void setSubunits(HashMap<String, Territory> subunits) {
+    public void setSubunits(HashSet<String> subunits) {
         this.subunits = subunits;
     }
 
