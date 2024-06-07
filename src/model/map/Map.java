@@ -1,7 +1,5 @@
 package model.map;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 import model.territory.Territory;
@@ -23,5 +21,9 @@ public class Map {
 
     public void setMap(HashMap<String, Territory> map) {
         this.map.putAll(map);
+    }
+
+    public Territory getTerritoryOnID(String id) {
+        return map.get(id);
     }
 }

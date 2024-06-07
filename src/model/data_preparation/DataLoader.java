@@ -5,20 +5,19 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import model.map.Map;
 import model.territory.Territory;
 import model.territory.TerritoryType;
 
 public class DataLoader {
-    private Map loadedMap;
+    private HashMap<String, Territory> loadedMap;
 
     public DataLoader(File file) {
-        loadedMap = new Map();
+        loadedMap = new HashMap<>();
         loadData(file);
     }
 
     public HashMap<String, Territory> sendMap() {
-        return loadedMap.getMap();
+        return loadedMap;
     }
 
     private void loadData(File file) {
@@ -41,12 +40,12 @@ public class DataLoader {
     }
 
     private void addTerritory(String[] data) {
-        addTerritory(sendID(data), sendName(data), sendTerritoryType(data));
+        addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
-    private void addTerritory(String id, String name, TerritoryType type) {
-        Territory territory = new Territory(id, name, type);
-        loadedMap.addToMap(id, territory);
+    private void addTerritory(String id, String name, TerritoryType type, boolean isCapital) {
+        Territory territory = new Territory(id, name, type, isCapital);
+        loadedMap.put(id, territory);
     }
 
     private String sendID(String[] data) {
@@ -59,5 +58,12 @@ public class DataLoader {
 
     private TerritoryType sendTerritoryType(String[] data) {
         return TerritoryType.valueOf(data[2]);
+    }
+
+    private boolean sendCapital(String[] data) {
+        if (data[3].equals("1")) {
+            return true;
+        }
+        return false;
     }
 }

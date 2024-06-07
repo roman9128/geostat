@@ -13,25 +13,7 @@ public class Service {
 
     public Service() {
         map = new Map();
-        fillTheMap("st.csv");
-        fillTheMap("sts.csv");
         fillTheMap("fd.csv");
-        organize(map);
-    }
-
-    private Map organize(Map map) {
-        MapOrganizer mapOrganizer = new MapOrganizer(map);
-        return mapOrganizer.organize(map);
-    }
-
-    private void fillTheMap(String path) {
-        File file = new File(path);
-        map.setMap(getMapFromFile(file));
-    }
-
-    private HashMap<String, Territory> getMapFromFile(File file) {
-        DataLoader dataLoader = new DataLoader(file);
-        return dataLoader.sendMap();
     }
 
     public String getList() {
@@ -42,6 +24,21 @@ public class Service {
             builder.append("\n");
         }
         return builder.toString();
-        
+    }
+
+    private void fillTheMap(String path) {
+        File file = new File(path);
+        map.setMap(getMapFromFile(file));
+        organize(map);
+    }
+
+    private HashMap<String, Territory> getMapFromFile(File file) {
+        DataLoader dataLoader = new DataLoader(file);
+        return dataLoader.sendMap();
+    }
+
+    private Map organize(Map map) {
+        MapOrganizer mapOrganizer = new MapOrganizer(map);
+        return mapOrganizer.organize(map);
     }
 }
