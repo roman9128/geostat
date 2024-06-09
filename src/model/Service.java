@@ -19,10 +19,6 @@ public class Service {
         fillTheMap("fd.csv");
     }
 
-    public Map sendMap(){
-        return map;
-    }
-
     public String getList() {
         StringBuilder builder = new StringBuilder();
         builder.append("Common list: \n");
