@@ -2,10 +2,13 @@ package model;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 
 import model.data_preparation.DataLoader;
 import model.data_preparation.MapOrganizer;
 import model.map.Map;
+import model.map.TerritorySorter;
+import model.territory.SubunitsViewer;
 import model.territory.Territory;
 
 public class Service {
@@ -16,6 +19,10 @@ public class Service {
         fillTheMap("fd.csv");
     }
 
+    public Map sendMap(){
+        return map;
+    }
+
     public String getList() {
         StringBuilder builder = new StringBuilder();
         builder.append("Common list: \n");
@@ -24,6 +31,26 @@ public class Service {
             builder.append("\n");
         }
         return builder.toString();
+    }
+
+    public String getSortedList() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Common list: \n");
+        TerritorySorter sorter = new TerritorySorter(map);
+        List<Territory> listToShow = sorter.getTerritories();
+        for (Territory territory : listToShow) {
+            builder.append("\n");
+            builder.append(territory);
+            builder.append("subunits: ");
+            builder.append(getSubunits(territory));
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+
+    private String getSubunits(Territory territory){
+        SubunitsViewer viewer = new SubunitsViewer();
+        return viewer.showSubunits(map, territory.getSubunits());
     }
 
     private void fillTheMap(String path) {

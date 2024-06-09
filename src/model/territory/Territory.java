@@ -2,8 +2,6 @@ package model.territory;
 
 import java.util.HashSet;
 
-import model.user_data.UserData;
-
 public class Territory {
 
     private String id;
@@ -16,20 +14,13 @@ public class Territory {
     private long square;
     private long population;
 
-    @SuppressWarnings("unused")
-    private UserData UserData1;
-    @SuppressWarnings("unused")
-    private UserData UserData2;
-    @SuppressWarnings("unused")
-    private UserData UserData3;
-    @SuppressWarnings("unused")
-    private UserData UserData4;
-    @SuppressWarnings("unused")
-    private UserData UserData5;
+    private long userData1;
+    private long userData2;
+    private long userData3;
 
     public Territory(String id, String name, int level, TerritoryType type, boolean isCapital,
-            HashSet<String> subunits, long square, long population, UserData userData1, UserData userData2,
-            UserData userData3, UserData userData4, UserData userData5) {
+            HashSet<String> subunits, long square, long population, long userData1, long userData2,
+            long userData3) {
         this.id = id;
         this.name = name;
         this.level = level;
@@ -38,11 +29,10 @@ public class Territory {
         this.subunits = subunits;
         this.square = square;
         this.population = population;
-        UserData1 = userData1;
-        UserData2 = userData2;
-        UserData3 = userData3;
-        UserData4 = userData4;
-        UserData5 = userData5;
+        this.userData1 = userData1;
+        this.userData2 = userData2;
+        this.userData3 = userData3;
+
     }
 
     public Territory(String id, String name, TerritoryType type, boolean isCapital) {
@@ -119,9 +109,50 @@ public class Territory {
         this.population = population;
     }
 
+    public long getUserData1() {
+        return userData1;
+    }
+
+    public void setUserData1(long userData1) {
+        this.userData1 = userData1;
+    }
+
+    public long getUserData2() {
+        return userData2;
+    }
+
+    public void setUserData2(long userData2) {
+        this.userData2 = userData2;
+    }
+
+    public long getUserData3() {
+        return userData3;
+    }
+
+    public void setUserData3(long userData3) {
+        this.userData3 = userData3;
+    }
+
     @Override
     public String toString() {
-        return "[id: " + id + ", level: " + level + ", name & type: " + name + " " + type + ", is capital: " + isCapital
-                + ", subunits' ids: " + subunits + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("id: ");
+        builder.append(id);
+        builder.append(", level: ");
+        builder.append(level);
+        builder.append(", name: ");
+        builder.append(name);
+        if (type == TerritoryType.Country) {
+            builder.append(" (");
+            builder.append(type);
+            builder.append("), ");
+        } else {
+            builder.append(type);
+        }
+        if (isCapital) {
+            builder.append(", it's a capital");
+        }
+        builder.append("\n");
+        return builder.toString();
     }
 }
