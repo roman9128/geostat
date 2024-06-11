@@ -145,13 +145,17 @@ public class Territory {
         if (type == TerritoryType.Country) {
             builder.append(" (");
             builder.append(type);
-            builder.append("), ");
+            builder.append(")");
         } else {
             builder.append(type);
         }
         if (isCapital) {
             builder.append(", it's a capital");
         }
+        builder.append(", area: ");
+        builder.append(square);
+        builder.append(", population: ");
+        builder.append(population);
         builder.append("\n");
         return builder.toString();
     }

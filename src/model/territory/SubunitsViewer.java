@@ -5,14 +5,12 @@ import java.util.HashSet;
 import model.map.Map;
 
 public class SubunitsViewer {
-    Map map;
-    HashSet<String> subunits;
-
+    
     public SubunitsViewer() {
-        showSubunits(map, subunits);
     }
 
-    public String showSubunits(Map map, HashSet<String> subunits) {
+    public String showSubunits(Map map, Territory territory) {
+        HashSet<String> subunits = territory.getSubunits();
         if (subunits == null) {
             return "no info";
         }

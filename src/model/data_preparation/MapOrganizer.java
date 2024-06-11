@@ -7,8 +7,7 @@ import model.territory.Territory;
 
 public class MapOrganizer {
 
-    public MapOrganizer(Map map) {
-        organize(map);
+    public MapOrganizer() {
     }
 
     public Map organize(Map map) {
