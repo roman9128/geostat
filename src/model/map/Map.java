@@ -15,7 +15,7 @@ public class Map {
         map.put(id, territory);
     }
 
-    public HashMap<String, Territory> getMap() {
+    public HashMap<String, Territory> getMapAsHashMap() {
         return map;
     }
 

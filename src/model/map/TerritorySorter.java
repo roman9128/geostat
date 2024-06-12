@@ -31,7 +31,7 @@ public class TerritorySorter implements Iterable<Territory> {
     }
 
     private void mapToList(Map map) {
-        for (HashMap.Entry<String, Territory> entry : map.getMap().entrySet()) {
+        for (HashMap.Entry<String, Territory> entry : map.getMapAsHashMap().entrySet()) {
             territories.add(entry.getValue());
         }
     }

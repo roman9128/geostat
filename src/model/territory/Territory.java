@@ -147,6 +147,7 @@ public class Territory {
             builder.append(type);
             builder.append(")");
         } else {
+            builder.append(" ");
             builder.append(type);
         }
         if (isCapital) {

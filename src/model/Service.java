@@ -6,7 +6,6 @@ import java.util.List;
 
 import model.data_preparation.AdditionalInfoLoader;
 import model.data_preparation.BasicInfoLoader;
-import model.data_preparation.MapOrganizer;
 import model.map.Map;
 import model.map.TerritorySorter;
 import model.territory.SubunitsViewer;
@@ -16,21 +15,14 @@ public class Service {
     private Map map;
 
     public Service() {
-        map = new Map();
-        prepareTheMap("fd.csv");
-        addAdditionalInfo(map, "ain.csv");
-    }
-
-    public Map addAdditionalInfo(Map map, String path) {
-        File file = new File(path);
-        AdditionalInfoLoader loader = new AdditionalInfoLoader(map, file);
-        return loader.sendMap();
+        map = getPreparedMap("fd.csv");
+        addAdditionalInfo("ain.csv");
     }
 
     public String getList() {
         StringBuilder builder = new StringBuilder();
         builder.append("Common list: \n");
-        for (HashMap.Entry<String, Territory> territory : map.getMap().entrySet()) {
+        for (HashMap.Entry<String, Territory> territory : map.getMapAsHashMap().entrySet()) {
             builder.append(territory.getValue());
             builder.append("\n");
         }
@@ -53,23 +45,14 @@ public class Service {
     }
 
     private String getSubunits(Territory territory) {
-        SubunitsViewer viewer = new SubunitsViewer();
-        return viewer.showSubunits(map, territory);
+        return new SubunitsViewer().showSubunits(map, territory);
     }
 
-    private void prepareTheMap(String path) {
-        File file = new File(path);
-        map.setMap(getMapFromFile(file));
-        organize(map);
+    private Map getPreparedMap(String path) {
+        return new BasicInfoLoader(new File(path)).sendMap();
     }
 
-    private HashMap<String, Territory> getMapFromFile(File file) {
-        BasicInfoLoader loader = new BasicInfoLoader(file);
-        return loader.sendMap();
-    }
-
-    private Map organize(Map map) {
-        MapOrganizer mapOrganizer = new MapOrganizer();
-        return mapOrganizer.organize(map);
+    private Map addAdditionalInfo(String path) {
+        return new AdditionalInfoLoader(map, new File(path)).sendMap();
     }
 }

@@ -1,22 +1,29 @@
 package model.data_preparation;
 
 import java.io.File;
-import java.util.HashMap;
 
+import model.map.Map;
 import model.territory.Territory;
 import model.territory.TerritoryType;
 
 public class BasicInfoLoader extends DataLoader {
 
-    private HashMap<String, Territory> loadedMap;
+    private Map loadedMap;
+    private MapOrganizer organizer;
 
     public BasicInfoLoader(File file) {
-        loadedMap = new HashMap<>();
+        loadedMap = new Map();
         loadData(file);
+        organizer = new MapOrganizer();
+        organize(loadedMap);
     }
 
-    public HashMap<String, Territory> sendMap() {
+    public Map sendMap() {
         return loadedMap;
+    }
+
+    private void organize(Map loadedMap){
+        organizer.organize(loadedMap);
     }
 
     @Override
@@ -26,7 +33,7 @@ public class BasicInfoLoader extends DataLoader {
 
     private void addTerritory(String id, String name, TerritoryType type, boolean isCapital) {
         Territory territory = new Territory(id, name, type, isCapital);
-        loadedMap.put(id, territory);
+        loadedMap.addToMap(id, territory);
     }
 
     private String sendID(String[] data) {

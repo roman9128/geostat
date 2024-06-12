@@ -17,7 +17,7 @@ public class MapOrganizer {
     }
 
     private void setTerritoryLevel(Map map) {
-        for (HashMap.Entry<String, Territory> entry : map.getMap().entrySet()) {
+        for (HashMap.Entry<String, Territory> entry : map.getMapAsHashMap().entrySet()) {
             if (entry.getKey().length() < 4) {
                 entry.getValue().setLevel(1);
             } else {
@@ -28,7 +28,7 @@ public class MapOrganizer {
     }
 
     private void setSubunits(Map map) {
-        for (HashMap.Entry<String, Territory> entry : map.getMap().entrySet()) {
+        for (HashMap.Entry<String, Territory> entry : map.getMapAsHashMap().entrySet()) {
             if (entry.getKey().length() > 3) {
                 String[] ids = entry.getKey().split("_");
                 for (int i = 1; i < ids.length; i++) {

@@ -18,8 +18,8 @@ public class AdditionalInfoLoader extends DataLoader {
 
     @Override
     void addInfoAboutTerritory(String[] data) {
-        map.getMap().get(data[0]).setSquare(sendArea(data));
-        map.getMap().get(data[0]).setPopulation(sendPopulation(data));
+        map.getMapAsHashMap().get(data[0]).setSquare(sendArea(data));
+        map.getMapAsHashMap().get(data[0]).setPopulation(sendPopulation(data));
     }
 
     private long sendArea(String[] data) {

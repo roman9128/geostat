@@ -16,9 +16,9 @@ public class SubunitsViewer {
         }
         StringBuilder builder = new StringBuilder();
         for (String subunitID : subunits) {
-            builder.append(map.getMap().get(subunitID).getName());
+            builder.append(map.getMapAsHashMap().get(subunitID).getName());
             builder.append(" ");
-            builder.append(map.getMap().get(subunitID).getType());
+            builder.append(map.getMapAsHashMap().get(subunitID).getType());
             builder.append(", ");
         }
         builder.deleteCharAt(builder.length() - 1);
