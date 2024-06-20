@@ -1,6 +1,6 @@
 package model.territory;
 
-import java.util.HashSet;
+import java.util.HashMap;
 
 public class Territory {
 
@@ -9,7 +9,7 @@ public class Territory {
     private int level;
     private TerritoryType type;
     private boolean isCapital;
-    private HashSet<String> subunits;
+    private HashMap<String, String> subunits;
 
     private long square;
     private long population;
@@ -19,7 +19,7 @@ public class Territory {
     private long userData3;
 
     public Territory(String id, String name, int level, TerritoryType type, boolean isCapital,
-            HashSet<String> subunits, long square, long population, long userData1, long userData2,
+            HashMap<String, String> subunits, long square, long population, long userData1, long userData2,
             long userData3) {
         this.id = id;
         this.name = name;
@@ -35,11 +35,13 @@ public class Territory {
 
     }
 
-    public Territory(String id, String name, TerritoryType type, boolean isCapital) {
+    public Territory(String id, String name, TerritoryType type, boolean isCapital, long square, long population) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.isCapital = isCapital;
+        this.square = square;
+        this.population = population;
     }
 
     public String getId() {
@@ -82,15 +84,15 @@ public class Territory {
         this.isCapital = isCapital;
     }
 
-    public HashSet<String> getSubunits() {
+    public HashMap<String, String> getSubunits() {
         return subunits;
     }
 
-    public void setSubunit(String subunit) {
+    public void setSubunit(String subunitID, String subunitName) {
         if (subunits == null) {
-            subunits = new HashSet<String>();
+            subunits = new HashMap<String, String>();
         }
-        this.subunits.add(subunit);
+        this.subunits.put(subunitID, subunitName);
     }
 
     public long getSquare() {
@@ -157,6 +159,12 @@ public class Territory {
         builder.append(square);
         builder.append(", population: ");
         builder.append(population);
+        builder.append(", subunits: ");
+        if (subunits == null) {
+            builder.append("no information");
+        } else {
+            builder.append(subunits.values());
+        }
         builder.append("\n");
         return builder.toString();
     }

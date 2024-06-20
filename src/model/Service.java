@@ -8,7 +8,6 @@ import model.data_preparation.AdditionalInfoLoader;
 import model.data_preparation.BasicInfoLoader;
 import model.map.Map;
 import model.map.TerritorySorter;
-import model.territory.SubunitsViewer;
 import model.territory.Territory;
 
 public class Service {
@@ -16,7 +15,7 @@ public class Service {
 
     public Service() {
         map = getPreparedMap("fd.csv");
-        addAdditionalInfo("ain.csv");
+        // addAdditionalInfo("ain.csv");
     }
 
     public String getList() {
@@ -37,15 +36,9 @@ public class Service {
         for (Territory territory : listToShow) {
             builder.append("\n");
             builder.append(territory);
-            builder.append("subunits: ");
-            builder.append(getSubunits(territory));
             builder.append("\n");
         }
         return builder.toString();
-    }
-
-    private String getSubunits(Territory territory) {
-        return new SubunitsViewer().showSubunits(map, territory);
     }
 
     private Map getPreparedMap(String path) {

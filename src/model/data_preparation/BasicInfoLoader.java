@@ -28,11 +28,11 @@ public class BasicInfoLoader extends DataLoader {
 
     @Override
     void addInfoAboutTerritory(String[] data) {
-        addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
+        addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data), sendArea(data), sendPopulation(data));
     }
 
-    private void addTerritory(String id, String name, TerritoryType type, boolean isCapital) {
-        Territory territory = new Territory(id, name, type, isCapital);
+    private void addTerritory(String id, String name, TerritoryType type, boolean isCapital, long square, long population) {
+        Territory territory = new Territory(id, name, type, isCapital, square, population);
         loadedMap.addToMap(id, territory);
     }
 
@@ -53,5 +53,13 @@ public class BasicInfoLoader extends DataLoader {
             return true;
         }
         return false;
+    }
+
+    private long sendArea(String[] data) {
+        return Long.parseLong(data[4]);
+    }
+
+    private long sendPopulation(String[] data) {
+        return Long.parseLong(data[5]);
     }
 }
