@@ -29,7 +29,7 @@ public class MapOrganizer {
 
     private void setSubunits(Map map) {
         for (HashMap.Entry<String, Territory> entry : map.getMapAsHashMap().entrySet()) {
-            String nameToShow = entry.getValue().getName() + " " + entry.getValue().getType();
+            String nameToShow = entry.getValue().getName();
             if (entry.getKey().length() > 3) {
                 String[] ids = entry.getKey().split("_");
                 for (int i = 1; i < ids.length; i++) {
