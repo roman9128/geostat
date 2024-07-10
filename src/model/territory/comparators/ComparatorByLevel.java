@@ -1,6 +1,8 @@
-package model.territory;
+package model.territory.comparators;
 
 import java.util.Comparator;
+
+import model.territory.Territory;
 
 public class ComparatorByLevel implements Comparator<Territory> {
 

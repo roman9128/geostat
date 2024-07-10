@@ -16,7 +16,7 @@ public class BasicInfoLoader extends DataLoader {
     public BasicInfoLoader(File file) {
         loadedMap = new Map();
         organizer = new MapOrganizer();
-        localizedNames = new Localizator().getLocalization();
+        localizedNames = new Localizator("rus").getLocalization();
         loadData(file);
         organize(loadedMap);
     }

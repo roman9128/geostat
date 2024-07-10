@@ -2,6 +2,8 @@ package model.territory;
 
 import java.util.HashMap;
 
+import model.types.DataType;
+
 public class Territory {
 
     private String id;
@@ -42,6 +44,20 @@ public class Territory {
         this.isCapital = isCapital;
         this.square = square;
         this.population = population;
+    }
+
+    public long getNumericalInfoByDataType(DataType type) {
+        long result = 0;
+        if (type.equals(DataType.area)) {
+            result = getSquare();
+        }
+        if (type.equals(DataType.population)) {
+            result = getPopulation();
+        }
+        if (type.equals(DataType.level)) {
+            result = getLevel();
+        }
+        return result;
     }
 
     public String getId() {

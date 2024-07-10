@@ -5,10 +5,11 @@ import java.util.HashMap;
 
 public class Localizator extends DataLoader {
     HashMap<String, String> names;
+    String language;
 
-    public Localizator() {
+    public Localizator(String language) {
         names = new HashMap<>();
-        loadData(new File("ru.txt"));
+        loadData(new File(language + ".txt"));
     }
 
     @Override
