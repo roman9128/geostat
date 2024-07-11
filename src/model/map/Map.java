@@ -77,4 +77,24 @@ public class Map {
         result.sort(new ComparatorByName());
         return result;
     }
+
+    public List<Territory> findByParameterWithinInterval(DataType type, long number1, long number2) {
+        List<Territory> result = new ArrayList<>();
+        long smallerNumber;
+        long largerNumber;
+        if (number1 > number2) {
+            largerNumber = number1;
+            smallerNumber = number2;
+        } else {
+            smallerNumber = number1;
+            largerNumber = number2;
+        }
+        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
+            if (smallerNumber <= entry.getValue().getNumericalInfoByDataType(type) && entry.getValue().getNumericalInfoByDataType(type) <= largerNumber) {
+                result.add(entry.getValue());
+            }
+        }
+        result.sort(new ComparatorByName());
+        return result;
+    }
 }

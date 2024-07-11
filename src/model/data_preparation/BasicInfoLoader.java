@@ -35,9 +35,9 @@ public class BasicInfoLoader extends DataLoader {
                 sendPopulation(data));
     }
 
-    private void addTerritory(String id, String name, TerritoryType type, boolean isCapital, long square,
+    private void addTerritory(String id, String name, TerritoryType type, HashMap<String, String> capital, long square,
             long population) {
-        Territory territory = new Territory(id, name, type, isCapital, square, population);
+        Territory territory = new Territory(id, name, type, capital, square, population);
         loadedMap.addToMap(id, territory);
     }
 
@@ -53,11 +53,12 @@ public class BasicInfoLoader extends DataLoader {
         return TerritoryType.valueOf(data[1]);
     }
 
-    private boolean sendCapital(String[] data) {
-        if (data[2].equals("1")) {
-            return true;
+    private HashMap<String, String> sendCapital(String[] data) {
+        HashMap<String, String> capital = new HashMap<>();
+        if (!data[2].equals("0")) {
+            capital.put(data[2], localizedNames.get(data[2]));
         }
-        return false;
+        return capital;
     }
 
     private long sendArea(String[] data) {

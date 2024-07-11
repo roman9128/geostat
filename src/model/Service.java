@@ -26,7 +26,7 @@ public class Service {
         return printResult(result);
     }
 
-    public String findByParameter(TerritoryType type) {
+    public String findByTerritoryType(TerritoryType type) {
         List<Territory> result = map.findByTerritoryType(type);
         return printResult(result);
     }
@@ -34,6 +34,11 @@ public class Service {
     public String findByParameter(DataType type, Operator operator, long number) {
         List<Territory> result = map.findByParameter(type, operator, number);
         return printResult(result);        
+    }
+
+    public String findByParameterWithinInterval(DataType type, long number1, long number2){
+        List<Territory> result = map.findByParameterWithinInterval(type, number1, number2);
+        return printResult(result);
     }
 
     public String getList() {

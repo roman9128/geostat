@@ -10,7 +10,7 @@ public class Territory {
     private String name;
     private int level;
     private TerritoryType type;
-    private boolean isCapital;
+    private HashMap<String, String> capital;
     private HashMap<String, String> subunits;
 
     private long square;
@@ -20,14 +20,14 @@ public class Territory {
     private long userData2;
     private long userData3;
 
-    public Territory(String id, String name, int level, TerritoryType type, boolean isCapital,
+    public Territory(String id, String name, int level, TerritoryType type, HashMap<String, String> capital,
             HashMap<String, String> subunits, long square, long population, long userData1, long userData2,
             long userData3) {
         this.id = id;
         this.name = name;
         this.level = level;
         this.type = type;
-        this.isCapital = isCapital;
+        this.capital = capital;
         this.subunits = subunits;
         this.square = square;
         this.population = population;
@@ -37,11 +37,11 @@ public class Territory {
 
     }
 
-    public Territory(String id, String name, TerritoryType type, boolean isCapital, long square, long population) {
+    public Territory(String id, String name, TerritoryType type, HashMap<String, String> capital, long square, long population) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.isCapital = isCapital;
+        this.capital = capital;
         this.square = square;
         this.population = population;
     }
@@ -92,12 +92,15 @@ public class Territory {
         this.type = type;
     }
 
-    public boolean isCapital() {
-        return isCapital;
+    public HashMap<String, String> getCapital() {
+        return capital;
     }
 
-    public void setCapital(boolean isCapital) {
-        this.isCapital = isCapital;
+    public void setCapital(String capitalID, String capitalName) {
+        if (capital == null) {
+            capital = new HashMap<String, String>();
+            this.capital.put(capitalID, capitalName);
+        }
     }
 
     public HashMap<String, String> getSubunits() {
@@ -168,8 +171,11 @@ public class Territory {
             builder.append(" ");
             builder.append(type);
         }
-        if (isCapital) {
-            builder.append(", it's a capital");
+        if (capital != null) {
+            builder.append(", capital is ");
+            builder.append(capital.values());
+        } else {
+            builder.append("");
         }
         builder.append(", area: ");
         builder.append(square);
