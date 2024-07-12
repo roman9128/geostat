@@ -41,6 +41,10 @@ public class Service {
         return printResult(result);
     }
 
+    public Territory chooseTerritory(String id) {
+        return map.getTerritoryOnID(id);
+    }
+
     public String getList() {
         StringBuilder builder = new StringBuilder();
         builder.append("Common list: \n");

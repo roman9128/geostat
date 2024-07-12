@@ -10,7 +10,7 @@ public class Territory {
     private String name;
     private int level;
     private TerritoryType type;
-    private HashMap<String, String> capital;
+    private String[] capital;
     private HashMap<String, String> subunits;
 
     private long square;
@@ -20,7 +20,7 @@ public class Territory {
     private long userData2;
     private long userData3;
 
-    public Territory(String id, String name, int level, TerritoryType type, HashMap<String, String> capital,
+    public Territory(String id, String name, int level, TerritoryType type, String[] capital,
             HashMap<String, String> subunits, long square, long population, long userData1, long userData2,
             long userData3) {
         this.id = id;
@@ -37,7 +37,7 @@ public class Territory {
 
     }
 
-    public Territory(String id, String name, TerritoryType type, HashMap<String, String> capital, long square, long population) {
+    public Territory(String id, String name, TerritoryType type, String[] capital, long square, long population) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -92,14 +92,15 @@ public class Territory {
         this.type = type;
     }
 
-    public HashMap<String, String> getCapital() {
+    public String[] getCapital() {
         return capital;
     }
 
     public void setCapital(String capitalID, String capitalName) {
         if (capital == null) {
-            capital = new HashMap<String, String>();
-            this.capital.put(capitalID, capitalName);
+            capital = new String[2];
+            capital[0] = capitalID;
+            capital[1] = capitalName;
         }
     }
 
@@ -172,8 +173,8 @@ public class Territory {
             builder.append(type);
         }
         if (capital != null) {
-            builder.append(", capital is ");
-            builder.append(capital.values());
+            builder.append(", capital: ");
+            builder.append(capital[1]);
         } else {
             builder.append("");
         }
