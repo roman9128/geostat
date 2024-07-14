@@ -7,3 +7,7 @@
 Добавить выбор языка, локализация
 
 Создавать подборки с получением общих данных для неё
+
+subunits to hashmap<string, territory>
+
+hashmap<string, long> для числовых данных, загрузка через add.infoloader

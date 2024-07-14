@@ -6,7 +6,6 @@ import model.types.DataType;
 
 public class Territory {
 
-    private String id;
     private String name;
     private int level;
     private TerritoryType type;
@@ -16,14 +15,11 @@ public class Territory {
     private long square;
     private long population;
 
-    private long userData1;
-    private long userData2;
-    private long userData3;
+    // private HashMap<String, Long> numericalData;
 
-    public Territory(String id, String name, int level, TerritoryType type, String[] capital,
+    public Territory(String name, int level, TerritoryType type, String[] capital,
             HashMap<String, String> subunits, long square, long population, long userData1, long userData2,
             long userData3) {
-        this.id = id;
         this.name = name;
         this.level = level;
         this.type = type;
@@ -31,14 +27,9 @@ public class Territory {
         this.subunits = subunits;
         this.square = square;
         this.population = population;
-        this.userData1 = userData1;
-        this.userData2 = userData2;
-        this.userData3 = userData3;
-
     }
 
-    public Territory(String id, String name, TerritoryType type, String[] capital, long square, long population) {
-        this.id = id;
+    public Territory(String name, TerritoryType type, String[] capital, long square, long population) {
         this.name = name;
         this.type = type;
         this.capital = capital;
@@ -58,14 +49,6 @@ public class Territory {
             result = getLevel();
         }
         return result;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -131,36 +114,10 @@ public class Territory {
         this.population = population;
     }
 
-    public long getUserData1() {
-        return userData1;
-    }
-
-    public void setUserData1(long userData1) {
-        this.userData1 = userData1;
-    }
-
-    public long getUserData2() {
-        return userData2;
-    }
-
-    public void setUserData2(long userData2) {
-        this.userData2 = userData2;
-    }
-
-    public long getUserData3() {
-        return userData3;
-    }
-
-    public void setUserData3(long userData3) {
-        this.userData3 = userData3;
-    }
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("id: ");
-        builder.append(id);
-        builder.append(", level: ");
+        builder.append("level: ");
         builder.append(level);
         builder.append(", name: ");
         builder.append(name);

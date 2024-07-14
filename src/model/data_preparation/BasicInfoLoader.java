@@ -37,7 +37,7 @@ public class BasicInfoLoader extends DataLoader {
 
     private void addTerritory(String id, String name, TerritoryType type, String[] capital, long square,
             long population) {
-        Territory territory = new Territory(id, name, type, capital, square, population);
+        Territory territory = new Territory(name, type, capital, square, population);
         loadedMap.addToMap(id, territory);
     }
 
