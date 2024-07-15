@@ -30,14 +30,12 @@ public class BasicInfoLoader extends DataLoader {
     }
 
     @Override
-    void addInfoAboutTerritory(String[] data) {
-        addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data), sendArea(data),
-                sendPopulation(data));
+    void addInfoAboutTerritory(String[] dataNames, String[] data) {
+        addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
-    private void addTerritory(String id, String name, TerritoryType type, String[] capital, long square,
-            long population) {
-        Territory territory = new Territory(name, type, capital, square, population);
+    private void addTerritory(String id, String name, TerritoryType type, String[] capital) {
+        Territory territory = new Territory(name, type, capital);
         loadedMap.addToMap(id, territory);
     }
 
@@ -60,13 +58,5 @@ public class BasicInfoLoader extends DataLoader {
             capital[1] = localizedNames.get(data[2]);
         }
         return capital;
-    }
-
-    private long sendArea(String[] data) {
-        return Long.parseLong(data[3]);
-    }
-
-    private long sendPopulation(String[] data) {
-        return Long.parseLong(data[4]);
     }
 }

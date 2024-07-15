@@ -29,14 +29,13 @@ public class MapOrganizer {
 
     private void setSubunits(Map map) {
         for (HashMap.Entry<String, Territory> entry : map.getMapAsHashMap().entrySet()) {
-            String nameToShow = entry.getValue().getName();
             if (entry.getKey().length() > 3) {
                 String[] ids = entry.getKey().split("_");
                 for (int i = 1; i < ids.length; i++) {
                     ids[i] = ids[i - 1] + "_" + ids[i];
                 }
                 for (int i = 0; i < ids.length - 1; i++) {
-                    map.getTerritoryOnID(ids[i]).setSubunit(entry.getKey(), nameToShow);
+                    map.getTerritoryOnID(ids[i]).setSubunit(entry.getKey(), entry.getValue());
                 }
             }
         }

@@ -7,7 +7,6 @@ import java.util.List;
 import model.territory.Territory;
 import model.territory.TerritoryType;
 import model.territory.comparators.ComparatorByName;
-import model.types.DataType;
 import model.types.Operator;
 
 public class Map {
@@ -55,21 +54,21 @@ public class Map {
         return result;
     }
 
-    public List<Territory> findByParameter(DataType type, Operator operator, long number) {
+    public List<Territory> findByLevel(Operator operator, int number) {
         List<Territory> result = new ArrayList<>();
         for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
             if (operator.equals(Operator.equal)) {
-                if (entry.getValue().getNumericalInfoByDataType(type) == number) {
+                if (entry.getValue().getLevel() == number) {
                     result.add(entry.getValue());
                 }
             }
             if (operator.equals(Operator.less)) {
-                if (entry.getValue().getNumericalInfoByDataType(type) < number) {
+                if (entry.getValue().getLevel() < number) {
                     result.add(entry.getValue());
                 }
             }
             if (operator.equals(Operator.more)) {
-                if (entry.getValue().getNumericalInfoByDataType(type) > number) {
+                if (entry.getValue().getLevel() > number) {
                     result.add(entry.getValue());
                 }
             }
@@ -78,23 +77,55 @@ public class Map {
         return result;
     }
 
-    public List<Territory> findByParameterWithinInterval(DataType type, long number1, long number2) {
+    public List<Territory> findByParameter(String dataName, Operator operator, long number) {
         List<Territory> result = new ArrayList<>();
-        long smallerNumber;
-        long largerNumber;
-        if (number1 > number2) {
-            largerNumber = number1;
-            smallerNumber = number2;
-        } else {
-            smallerNumber = number1;
-            largerNumber = number2;
-        }
-        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-            if (smallerNumber <= entry.getValue().getNumericalInfoByDataType(type) && entry.getValue().getNumericalInfoByDataType(type) <= largerNumber) {
-                result.add(entry.getValue());
+        try {
+            for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
+                if (operator.equals(Operator.equal)) {
+                    if (entry.getValue().getNumericalData().get(dataName) == number) {
+                        result.add(entry.getValue());
+                    }
+                }
+                if (operator.equals(Operator.less)) {
+                    if (entry.getValue().getNumericalData().get(dataName) < number) {
+                        result.add(entry.getValue());
+                    }
+                }
+                if (operator.equals(Operator.more)) {
+                    if (entry.getValue().getNumericalData().get(dataName) > number) {
+                        result.add(entry.getValue());
+                    }
+                }
             }
+            result.sort(new ComparatorByName());
+        } catch (Exception e) {
+            System.err.println("ERROR: There's no such data name");
         }
-        result.sort(new ComparatorByName());
+        return result;
+    }
+
+    public List<Territory> findByParameterWithinInterval(String dataName, long number1, long number2) {
+        List<Territory> result = new ArrayList<>();
+        try {
+            long smallerNumber;
+            long largerNumber;
+            if (number1 > number2) {
+                largerNumber = number1;
+                smallerNumber = number2;
+            } else {
+                smallerNumber = number1;
+                largerNumber = number2;
+            }
+            for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
+                if (smallerNumber <= entry.getValue().getNumericalData().get(dataName)
+                        && entry.getValue().getNumericalData().get(dataName) <= largerNumber) {
+                    result.add(entry.getValue());
+                }
+            }
+            result.sort(new ComparatorByName());
+        } catch (Exception e) {
+            System.err.println("ERROR: There's no such data name");
+        }
         return result;
     }
 }

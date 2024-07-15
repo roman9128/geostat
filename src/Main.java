@@ -1,10 +1,9 @@
 import model.Service;
-import model.territory.TerritoryType;
 
 public class Main {
     public static void main(String[] args) {
 
         Service service = new Service();
-        System.out.println(service.findByTerritoryType(TerritoryType.Oblast));
+        System.out.println(service.getNumericalDataNames());
     }
 }

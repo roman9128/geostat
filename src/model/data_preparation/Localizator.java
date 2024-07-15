@@ -13,7 +13,7 @@ public class Localizator extends DataLoader {
     }
 
     @Override
-    void addInfoAboutTerritory(String[] data) {
+    void addInfoAboutTerritory(String[] dataNames, String[] data) {
         names.put(data[0], data[1]);
     }
 
