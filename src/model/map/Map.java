@@ -7,13 +7,35 @@ import java.util.List;
 import model.territory.Territory;
 import model.territory.TerritoryType;
 import model.territory.comparators.ComparatorByName;
+import model.territory_set.TerritorySet;
 import model.types.Operator;
 
 public class Map {
     private HashMap<String, Territory> map;
+    private HashMap<String, TerritorySet> sets;
+    private String[] userDataNames;
 
     public Map() {
         map = new HashMap<String, Territory>();
+    }
+
+    public HashMap<String, TerritorySet> getSet() {
+        return sets;
+    }
+
+    public void addSet(String setName, TerritorySet terrSet) {
+        if (sets == null) {
+            sets = new HashMap<String, TerritorySet>();
+        }
+        this.sets.put(setName, terrSet);
+    }
+
+    public String[] getUserDataNames() {
+        return userDataNames;
+    }
+
+    public void setUserDataNames(String[] userDataNames) {
+        this.userDataNames = userDataNames;
     }
 
     public void addToMap(String id, Territory territory) {

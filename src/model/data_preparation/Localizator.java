@@ -4,8 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 
 public class Localizator extends DataLoader {
-    HashMap<String, String> names;
-    String language;
+    private HashMap<String, String> names;
 
     public Localizator(String language) {
         names = new HashMap<>();
@@ -13,7 +12,7 @@ public class Localizator extends DataLoader {
     }
 
     @Override
-    void addInfoAboutTerritory(String[] dataNames, String[] data) {
+    void addInfoAboutTerritory(String[] data) {
         names.put(data[0], data[1]);
     }
 

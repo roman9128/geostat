@@ -12,11 +12,11 @@ public abstract class DataLoader {
     void loadData(File file) {
         try {
             Scanner scanner = new Scanner(file);
-            String[] dataNames = scanner.nextLine().split(";");
+            scanner.nextLine();
             while (scanner.hasNextLine()) {
                 try {
                     String[] data = scanner.nextLine().split(";");
-                    addInfoAboutTerritory(dataNames, data);
+                    addInfoAboutTerritory(data);
                 } catch (Exception e) {
                     System.out.println("There are wrong data in datafile");
                 }
@@ -28,5 +28,5 @@ public abstract class DataLoader {
         }
     }
 
-    abstract void addInfoAboutTerritory(String[] dataNames, String[] data);
+    abstract void addInfoAboutTerritory(String[] data);
 }

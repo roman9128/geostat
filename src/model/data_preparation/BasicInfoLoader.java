@@ -30,13 +30,12 @@ public class BasicInfoLoader extends DataLoader {
     }
 
     @Override
-    void addInfoAboutTerritory(String[] dataNames, String[] data) {
+    void addInfoAboutTerritory(String[] data) {
         addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
     private void addTerritory(String id, String name, TerritoryType type, String[] capital) {
-        Territory territory = new Territory(name, type, capital);
-        loadedMap.addToMap(id, territory);
+        loadedMap.addToMap(id, new Territory(name, type, capital));
     }
 
     private String sendID(String[] data) {

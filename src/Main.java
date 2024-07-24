@@ -1,10 +1,17 @@
 import model.Service;
-import model.types.Operator;
 
 public class Main {
     public static void main(String[] args) {
 
         Service service = new Service();
-        System.out.println(service.findByParameter("population", Operator.less, 1000000));
+        service.createTerritorySet("firstset");
+        service.createTerritorySet("secondset");
+        service.addTerritoryToSet("firstset", "RUS_CFO_BEL");
+        service.addTerritoryToSet("firstset", "RUS_CFO_BRJ");
+        service.addTerritoryToSet("secondset", "RUS_CFO_VOR");
+        service.addTerritoryToSet("secondset", "RUS_CFO_TUL");
+        System.out.println(service.getTerritorySetsNames());
+
+        
     }
 }

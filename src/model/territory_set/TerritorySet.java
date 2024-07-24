@@ -7,12 +7,10 @@ import model.territory.Territory;
 
 public class TerritorySet {
 
-    private String setName;
     private HashMap<String, Territory> territories;
     private HashMap<String, Long> numericalData;
 
-    public TerritorySet(String setName) {
-        this.setName = setName;
+    public TerritorySet() {
     }
 
     public void addToSet(Map map, String ID) {
@@ -20,22 +18,23 @@ public class TerritorySet {
             territories = new HashMap<>();
         }
         this.territories.put(ID, map.getTerritoryOnID(ID));
+        calculateNumericalDataForSet(territories);
+    }
+
+    private void calculateNumericalDataForSet(HashMap<String, Territory> territories) {
+        HashMap<String, Long> dataToAdd = new HashMap<>();
         if (numericalData == null) {
             numericalData = new HashMap<>();
-            this.numericalData = map.getTerritoryOnID(ID).getNumericalData();
-        } else {
-            for (HashMap.Entry<String, Long> entry : map.getTerritoryOnID(ID).getNumericalData().entrySet()) {
-                this.numericalData.put(entry.getKey(), entry.getValue() + this.numericalData.get(entry.getKey()));
+        }
+        for (HashMap.Entry<String, Territory> territoryEntry : territories.entrySet()) {
+            for (HashMap.Entry<String, Long> entry : territoryEntry.getValue().getNumericalData().entrySet()) {
+                if (dataToAdd.get(entry.getKey()) == null) {
+                    dataToAdd.put(entry.getKey(), 0l);
+                }
+                dataToAdd.put(entry.getKey(), dataToAdd.get(entry.getKey()) + entry.getValue());
             }
         }
-    }
-
-    public String getSetName() {
-        return setName;
-    }
-
-    public void setSetName(String setName) {
-        this.setName = setName;
+        numericalData.putAll(dataToAdd);
     }
 
     public HashMap<String, Territory> getTerritories() {
@@ -44,5 +43,11 @@ public class TerritorySet {
 
     public HashMap<String, Long> getNumericalData() {
         return numericalData;
+    }
+
+    @Override
+    public String toString() {
+        return "includes\n[territories=" + territories + "\nnumerical data of set = " + numericalData
+                + "]";
     }
 }

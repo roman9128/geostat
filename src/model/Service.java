@@ -1,9 +1,9 @@
 package model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import model.data_preparation.AdditionalInfoLoader;
 import model.data_preparation.BasicInfoLoader;
@@ -11,6 +11,7 @@ import model.map.Map;
 import model.map.TerritorySorter;
 import model.territory.Territory;
 import model.territory.TerritoryType;
+import model.territory_set.TerritorySet;
 import model.types.Operator;
 
 public class Service {
@@ -21,8 +22,28 @@ public class Service {
         map = addAdditionalInfo("nd.csv");
     }
 
-    public Set<String> getNumericalDataNames(){
-        return map.getTerritoryOnID("RUS").getNumericalData().keySet();
+    public void createTerritorySet(String setName) {
+        map.addSet(setName, new TerritorySet());
+    }
+
+    public void addTerritoryToSet(String setName, String ID) {
+        map.getSet().get(setName).addToSet(map, ID);
+    }
+
+    public ArrayList<String> getTerritorySetsNames() {
+        ArrayList<String> result = new ArrayList<>();
+        for (HashMap.Entry<String, TerritorySet> entry : map.getSet().entrySet()) {
+            result.add(entry.getKey());
+        }
+        return result;
+    }
+
+    public HashMap<String, TerritorySet> getAllSets(){
+        return map.getSet();
+    }
+
+    public String[] getNumericalDataNames() {
+        return map.getUserDataNames();
     }
 
     public String findByName(String name) {
