@@ -42,6 +42,10 @@ public class Service {
         return map.getSet();
     }
 
+    public TerritorySet getSetByName(String setName){
+        return map.getSet().get(setName);
+    }
+
     public String[] getNumericalDataNames() {
         return map.getUserDataNames();
     }

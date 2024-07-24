@@ -10,8 +10,6 @@ public class Main {
         service.addTerritoryToSet("firstset", "RUS_CFO_BRJ");
         service.addTerritoryToSet("secondset", "RUS_CFO_VOR");
         service.addTerritoryToSet("secondset", "RUS_CFO_TUL");
-        System.out.println(service.getTerritorySetsNames());
-
-        
+        System.out.println(service.getSetByName("firstset"));
     }
 }
