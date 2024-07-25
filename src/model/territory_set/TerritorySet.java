@@ -13,6 +13,7 @@ public class TerritorySet {
     public TerritorySet() {
     }
 
+    
     public void addToSet(Map map, String ID) {
         if (territories == null) {
             territories = new HashMap<>();
@@ -20,7 +21,7 @@ public class TerritorySet {
         this.territories.put(ID, map.getTerritoryOnID(ID));
         calculateNumericalDataForSet(territories);
     }
-
+    
     private void calculateNumericalDataForSet(HashMap<String, Territory> territories) {
         HashMap<String, Long> dataToAdd = new HashMap<>();
         if (numericalData == null) {
@@ -34,20 +35,29 @@ public class TerritorySet {
                 dataToAdd.put(entry.getKey(), dataToAdd.get(entry.getKey()) + entry.getValue());
             }
         }
+        numericalData.clear();
         numericalData.putAll(dataToAdd);
     }
-
+    
     public HashMap<String, Territory> getTerritories() {
         return territories;
     }
-
+    
     public HashMap<String, Long> getNumericalData() {
         return numericalData;
     }
+    
+    public void setTerritories(HashMap<String, Territory> territories) {
+        this.territories = territories;
+    }
 
+    public void setNumericalData(HashMap<String, Long> numericalData) {
+        this.numericalData = numericalData;
+    }
+    
     @Override
     public String toString() {
         return "includes\n[territories=" + territories + "\nnumerical data of set = " + numericalData
-                + "]";
+        + "]";
     }
 }

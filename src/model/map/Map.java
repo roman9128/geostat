@@ -30,6 +30,18 @@ public class Map {
         this.sets.put(setName, terrSet);
     }
 
+    public void removeSet(String setName){
+        sets.remove(setName);
+    }
+
+    public void renameSet(String previousSetName, String newSetName) {
+        TerritorySet newSet = new TerritorySet();
+        newSet.setTerritories(getSet().get(previousSetName).getTerritories());
+        newSet.setNumericalData(getSet().get(previousSetName).getNumericalData());
+        addSet(newSetName, newSet);
+        removeSet(previousSetName);
+    }
+
     public String[] getUserDataNames() {
         return userDataNames;
     }

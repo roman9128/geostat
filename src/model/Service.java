@@ -38,12 +38,20 @@ public class Service {
         return result;
     }
 
-    public HashMap<String, TerritorySet> getAllSets(){
+    public HashMap<String, TerritorySet> getAllSets() {
         return map.getSet();
     }
 
-    public TerritorySet getSetByName(String setName){
+    public TerritorySet getSetByName(String setName) {
         return map.getSet().get(setName);
+    }
+
+    public void renameSet(String previousSetName, String newSetName) {
+        map.renameSet(previousSetName, newSetName);
+    }
+
+    public void removeSet(String setName) {
+        map.removeSet(setName);
     }
 
     public String[] getNumericalDataNames() {

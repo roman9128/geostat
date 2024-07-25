@@ -82,14 +82,14 @@ public class Territory {
         builder.append(level);
         builder.append(", name: ");
         builder.append(name);
-        if (type == TerritoryType.Country) {
-            builder.append(" (");
-            builder.append(type);
-            builder.append(")");
-        } else {
-            builder.append(" ");
-            builder.append(type);
-        }
+        // if (type == TerritoryType.Country) {
+        //     builder.append(" (");
+        //     builder.append(type);
+        //     builder.append(")");
+        // } else {
+        //     builder.append(" ");
+        //     builder.append(type);
+        // }
         if (capital != null) {
             builder.append(", capital: ");
             builder.append(capital[1]);
