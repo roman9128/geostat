@@ -14,11 +14,16 @@ public class TerritorySet {
     }
 
     
-    public void addToSet(Map map, String ID) {
+    public void addToSet(Map map, String id) {
         if (territories == null) {
             territories = new HashMap<>();
         }
-        this.territories.put(ID, map.getTerritoryOnID(ID));
+        this.territories.put(id, map.getTerritoryOnID(id));
+        calculateNumericalDataForSet(territories);
+    }
+
+    public void removeFromSet (String id){
+        this.territories.remove(id);
         calculateNumericalDataForSet(territories);
     }
     
@@ -57,7 +62,6 @@ public class TerritorySet {
     
     @Override
     public String toString() {
-        return "includes\n[territories=" + territories + "\nnumerical data of set = " + numericalData
-        + "]";
+        return "includes\nterritories:\n" + territories + "\nnumerical data of set:\n" + numericalData;
     }
 }

@@ -26,8 +26,12 @@ public class Service {
         map.addSet(setName, new TerritorySet());
     }
 
-    public void addTerritoryToSet(String setName, String ID) {
-        map.getSet().get(setName).addToSet(map, ID);
+    public void addTerritoryToSet(String setName, String id) {
+        map.getSet().get(setName).addToSet(map, id);
+    }
+
+    public void removeTerritoryFromSet (String setName, String id){
+        map.getSet().get(setName).removeFromSet(id);
     }
 
     public ArrayList<String> getTerritorySetsNames() {
