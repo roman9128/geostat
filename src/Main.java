@@ -1,13 +1,10 @@
 import model.Service;
+import model.types.Operator;
 
 public class Main {
     public static void main(String[] args) {
 
         Service service = new Service();
-        // System.out.println(service.getSortedList());
-        service.createTerritorySet("newrandomset");
-        service.addTerritoryToSet("newrandomset", "RUS_CFO_BRJ");
-        service.addTerritoryToSet("newrandomset", "RUS_CFO_BEL");
-        System.out.println(service.getSetByName("newrandomset"));
+        System.out.println(service.findByLevel(Operator.equal, 1));
     }
 }

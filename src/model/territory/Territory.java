@@ -7,24 +7,25 @@ public class Territory {
     private String name;
     private int level;
     private TerritoryType type;
-    private String[] capital;
+    private HashMap<String, Territory> capital;
     private HashMap<String, Territory> subunits;
+    private HashMap<String, Territory> structuredSubunits;
     private HashMap<String, Long> numericalData;
 
-    public Territory(String name, TerritoryType type, String[] capital) {
+    public Territory(String name, TerritoryType type, HashMap<String, Territory> capital) {
         this.name = name;
         this.type = type;
         this.capital = capital;
     }
-    
+
     public String getName() {
         return name;
     }
-    
+
     public void setName(String name) {
         this.name = name;
     }
-    
+
     public int getLevel() {
         return level;
     }
@@ -32,25 +33,30 @@ public class Territory {
     public void setLevel(int level) {
         this.level = level;
     }
-    
+
     public TerritoryType getType() {
         return type;
     }
-    
+
     public void setType(TerritoryType type) {
         this.type = type;
     }
-    
-    public String[] getCapital() {
+
+    public HashMap<String, Territory> getCapital() {
         return capital;
     }
 
-    public void setCapital(String capitalID, String capitalName) {
+    public String getCapitalID() {
+        String capitalID = capital.keySet().toString();
+        capitalID = capitalID.replaceAll("\\,|\\[|\\]|\\s", "");
+        return capitalID;
+    }
+
+    public void setCapital(String capitalID, Territory capitalTerritory) {
         if (capital == null) {
-            capital = new String[2];
-            capital[0] = capitalID;
-            capital[1] = capitalName;
+            capital = new HashMap<String, Territory>();
         }
+        this.capital.put(capitalID, capitalTerritory);
     }
 
     public HashMap<String, Territory> getSubunits() {
@@ -63,7 +69,18 @@ public class Territory {
         }
         this.subunits.put(subunitID, subunit);
     }
-    
+
+    public HashMap<String, Territory> getStructuredSubunit() {
+        return structuredSubunits;
+    }
+
+    public void setStructuredSubunit(String subunitID, Territory subunit) {
+        if (structuredSubunits == null) {
+            structuredSubunits = new HashMap<String, Territory>();
+        }
+        this.structuredSubunits.put(subunitID, subunit);
+    }
+
     public HashMap<String, Long> getNumericalData() {
         return numericalData;
     }
@@ -83,16 +100,16 @@ public class Territory {
         builder.append(", name: ");
         builder.append(name);
         // if (type == TerritoryType.Country) {
-        //     builder.append(" (");
-        //     builder.append(type);
-        //     builder.append(")");
+        // builder.append(" (");
+        // builder.append(type);
+        // builder.append(")");
         // } else {
-        //     builder.append(" ");
-        //     builder.append(type);
+        // builder.append(" ");
+        // builder.append(type);
         // }
         if (capital != null) {
             builder.append(", capital: ");
-            builder.append(capital[1]);
+            builder.append(capital);
         } else {
             builder.append("");
         }
@@ -104,11 +121,17 @@ public class Territory {
             builder.append(numericalData.toString());
         }
         builder.append(", subunits: ");
-        if (subunits == null) {
+        // if (subunits == null) {
+        //     builder.append("no information");
+        // } else {
+        //     builder.append("\n");
+        //     builder.append(subunits.values());
+        // }
+        if (structuredSubunits == null) {
             builder.append("no information");
         } else {
             builder.append("\n");
-            builder.append(subunits.values());
+            builder.append(structuredSubunits.values());
         }
         builder.append("\n");
         return builder.toString();
