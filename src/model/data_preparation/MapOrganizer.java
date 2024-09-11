@@ -30,8 +30,11 @@ public class MapOrganizer {
     }
 
     private void setCapital(HashMap.Entry<String, Territory> entry, Map map) {
-        entry.getValue().setCapital(entry.getValue().getCapitalID(),
-                map.getTerritoryOnID(entry.getValue().getCapitalID()));
+        try {
+            entry.getValue().setCapital(entry.getValue().getCapitalID(), map.getTerritoryOnID(entry.getValue().getCapitalID()));
+        } catch (Exception e) {
+            
+        }
     }
 
     private void setSubunits(HashMap.Entry<String, Territory> entry, Map map) {

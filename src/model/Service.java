@@ -121,6 +121,7 @@ public class Service {
             builder.append("Not found");
         }
         for (Territory territory : result) {
+            builder.append("- ");
             builder.append(territory);
             builder.append("\n");
         }

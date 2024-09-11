@@ -52,6 +52,11 @@ public class Territory {
         return capitalID;
     }
 
+    public String getCapitalName() {
+        String capitalName = capital.get(getCapitalID()).getName();
+        return capitalName;
+    }
+
     public void setCapital(String capitalID, Territory capitalTerritory) {
         if (capital == null) {
             capital = new HashMap<String, Territory>();
@@ -99,17 +104,9 @@ public class Territory {
         builder.append(level);
         builder.append(", name: ");
         builder.append(name);
-        // if (type == TerritoryType.Country) {
-        // builder.append(" (");
-        // builder.append(type);
-        // builder.append(")");
-        // } else {
-        // builder.append(" ");
-        // builder.append(type);
-        // }
         if (capital != null) {
             builder.append(", capital: ");
-            builder.append(capital);
+            builder.append(getCapitalName());
         } else {
             builder.append("");
         }

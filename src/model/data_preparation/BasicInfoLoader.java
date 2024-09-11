@@ -51,10 +51,11 @@ public class BasicInfoLoader extends DataLoader {
     }
 
     private HashMap<String, Territory> sendCapital(String[] data) {
-        HashMap<String, Territory> capital = new HashMap<>();
         if (!data[2].equals("0")) {
+            HashMap<String, Territory> capital = new HashMap<>();
             capital.put(data[2], null);
+            return capital;
         }
-        return capital;
+        return null;
     }
 }
