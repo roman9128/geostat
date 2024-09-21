@@ -103,12 +103,25 @@ public class Service {
 
     public String getSortedList() {
         StringBuilder builder = new StringBuilder();
+        TerritorySorter sorter = new TerritorySorter();
         builder.append("Common list: \n");
-        TerritorySorter sorter = new TerritorySorter(map);
-        List<Territory> listToShow = sorter.getTerritories();
+        List<Territory> listToShow = sorter.sortTerritories(map.getMapAsHashMap());
         for (Territory territory : listToShow) {
             builder.append("\n");
-            builder.append(territory);
+            builder.append(territory.getName());
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
+    
+    public String getSortedListOfSubunits(String id) {
+        StringBuilder builder = new StringBuilder();
+        TerritorySorter sorter = new TerritorySorter();
+        builder.append("subunits of " + map.getTerritoryOnID(id).getName() + ": \n");
+        List<Territory> listToShow = sorter.sortTerritories(map.getTerritoryOnID(id).getSubunits());
+        for (Territory territory : listToShow) {
+            builder.append("\n");
+            builder.append(territory.getName());
             builder.append("\n");
         }
         return builder.toString();
@@ -121,7 +134,6 @@ public class Service {
             builder.append("Not found");
         }
         for (Territory territory : result) {
-            builder.append("- ");
             builder.append(territory);
             builder.append("\n");
         }

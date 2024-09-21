@@ -9,7 +9,6 @@ public class Territory {
     private TerritoryType type;
     private HashMap<String, Territory> capital;
     private HashMap<String, Territory> subunits;
-    private HashMap<String, Territory> structuredSubunits;
     private HashMap<String, Long> numericalData;
 
     public Territory(String name, TerritoryType type, HashMap<String, Territory> capital) {
@@ -75,17 +74,6 @@ public class Territory {
         this.subunits.put(subunitID, subunit);
     }
 
-    public HashMap<String, Territory> getStructuredSubunit() {
-        return structuredSubunits;
-    }
-
-    public void setStructuredSubunit(String subunitID, Territory subunit) {
-        if (structuredSubunits == null) {
-            structuredSubunits = new HashMap<String, Territory>();
-        }
-        this.structuredSubunits.put(subunitID, subunit);
-    }
-
     public HashMap<String, Long> getNumericalData() {
         return numericalData;
     }
@@ -97,38 +85,33 @@ public class Territory {
         this.numericalData.put(dataName, dataValue);
     }
 
+    private String printNumericalData() {
+        StringBuilder builder = new StringBuilder();
+        for (HashMap.Entry<String, Long> entry : numericalData.entrySet()) {
+            builder.append("\n\t");
+            builder.append(entry.getKey());
+            builder.append(": ");
+            builder.append(entry.getValue());
+        }
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("level: ");
-        builder.append(level);
-        builder.append(", name: ");
+        builder.append("name: ");
         builder.append(name);
         if (capital != null) {
-            builder.append(", capital: ");
+            builder.append(",\ncapital: ");
             builder.append(getCapitalName());
         } else {
             builder.append("");
         }
-        builder.append(", numerical data: ");
+        builder.append(",\nnumerical data: ");
         if (numericalData == null) {
             builder.append("no information");
         } else {
-            builder.append("\n");
-            builder.append(numericalData.toString());
-        }
-        builder.append(", subunits: ");
-        // if (subunits == null) {
-        //     builder.append("no information");
-        // } else {
-        //     builder.append("\n");
-        //     builder.append(subunits.values());
-        // }
-        if (structuredSubunits == null) {
-            builder.append("no information");
-        } else {
-            builder.append("\n");
-            builder.append(structuredSubunits.values());
+            builder.append(printNumericalData());
         }
         builder.append("\n");
         return builder.toString();

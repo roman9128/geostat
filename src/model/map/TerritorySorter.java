@@ -7,37 +7,40 @@ import java.util.List;
 
 import model.territory.Territory;
 import model.territory.comparators.ComparatorByLevel;
-// import model.territory.comparators.ComparatorByName;
+import model.territory.comparators.ComparatorByName;
 
 public class TerritorySorter implements Iterable<Territory> {
-    private List<Territory> territories;
+    private List<Territory> sortedTerritories;
 
-    public TerritorySorter(Map map) {
-        territories = new ArrayList<>();
-        mapToList(map);
+    public TerritorySorter() {
     }
 
-    public List<Territory> getTerritories() {
-        sortByLevel();
-        return territories;
+    public List<Territory> sortTerritories(HashMap<String, Territory> territoriesToSort) {
+        sortedTerritories = new ArrayList<>();
+        mapToList(territoriesToSort);
+        sortByName();
+        return sortedTerritories;
     }
 
     @Override
     public Iterator<Territory> iterator() {
-        return new TerritoryIterator(territories);
+        return new TerritoryIterator(sortedTerritories);
     }
 
-    private void sortByLevel() {
-        territories.sort(new ComparatorByLevel());
+    private void sortByName() {
+        sortedTerritories.sort(new ComparatorByName());
     }
 
-    // private void sortByName() {
-    //     territories.sort(new ComparatorByName());
-    // }
-
-    private void mapToList(Map map) {
-        for (HashMap.Entry<String, Territory> entry : map.getMapAsHashMap().entrySet()) {
-            territories.add(entry.getValue());
+    private void mapToList(HashMap<String, Territory> territoriesToSort) {
+        List<Territory> tempList = new ArrayList<>();
+        for (HashMap.Entry<String, Territory> entry : territoriesToSort.entrySet()) {
+            tempList.add(entry.getValue());
+        }
+        tempList.sort(new ComparatorByLevel());
+        for (Territory territory : tempList) {
+            if (territory.getLevel() == tempList.get(0).getLevel()) {
+                sortedTerritories.add(territory);
+            }
         }
     }
 }

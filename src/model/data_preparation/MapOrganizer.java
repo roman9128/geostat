@@ -15,7 +15,6 @@ public class MapOrganizer {
             setTerritoryLevel(entry);
             setCapital(entry, map);
             setSubunits(entry, map);
-            structureSubunits(entry);
         }
         return map;
     }
@@ -31,9 +30,10 @@ public class MapOrganizer {
 
     private void setCapital(HashMap.Entry<String, Territory> entry, Map map) {
         try {
-            entry.getValue().setCapital(entry.getValue().getCapitalID(), map.getTerritoryOnID(entry.getValue().getCapitalID()));
+            entry.getValue().setCapital(entry.getValue().getCapitalID(),
+                    map.getTerritoryOnID(entry.getValue().getCapitalID()));
         } catch (Exception e) {
-            
+
         }
     }
 
@@ -45,17 +45,6 @@ public class MapOrganizer {
             }
             for (int i = 0; i < ids.length - 1; i++) {
                 map.getTerritoryOnID(ids[i]).setSubunit(entry.getKey(), entry.getValue());
-                map.getTerritoryOnID(ids[i]).setStructuredSubunit(entry.getKey(), entry.getValue());
-            }
-        }
-    }
-
-    private void structureSubunits(HashMap.Entry<String, Territory> entry) {
-        if (entry.getValue().getSubunits() != null) {
-            for (HashMap.Entry<String, Territory> subunit : entry.getValue().getSubunits().entrySet()) {
-                if (subunit.getValue().getLevel() - entry.getValue().getLevel() != 1) {
-                    entry.getValue().getStructuredSubunit().remove(subunit.getKey());
-                }
             }
         }
     }
