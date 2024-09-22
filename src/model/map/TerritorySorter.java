@@ -2,14 +2,14 @@ package model.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.List;
 
 import model.territory.Territory;
 import model.territory.comparators.ComparatorByLevel;
 import model.territory.comparators.ComparatorByName;
 
-public class TerritorySorter implements Iterable<Territory> {
+public class TerritorySorter /*implements Iterable<Territory>*/ {
     private List<Territory> sortedTerritories;
 
     public TerritorySorter() {
@@ -22,10 +22,10 @@ public class TerritorySorter implements Iterable<Territory> {
         return sortedTerritories;
     }
 
-    @Override
-    public Iterator<Territory> iterator() {
-        return new TerritoryIterator(sortedTerritories);
-    }
+    // @Override
+    // public Iterator<Territory> iterator() {
+    //     return new TerritoryIterator(sortedTerritories);
+    // }
 
     private void sortByName() {
         sortedTerritories.sort(new ComparatorByName());

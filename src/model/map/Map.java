@@ -30,7 +30,7 @@ public class Map {
         this.sets.put(setName, terrSet);
     }
 
-    public void removeSet(String setName){
+    public void removeSet(String setName) {
         sets.remove(setName);
     }
 
@@ -64,6 +64,15 @@ public class Map {
 
     public Territory getTerritoryOnID(String id) {
         return map.get(id);
+    }
+
+    public String getTerritoryID(Territory territory) {
+        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
+            if (entry.getValue().equals(territory)) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     public List<Territory> findByName(String name) {
