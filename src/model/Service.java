@@ -94,12 +94,13 @@ public class Service {
     public String getSortedList() {
         StringBuilder builder = new StringBuilder();
         TerritorySorter sorter = new TerritorySorter();
-        builder.append("Common list: \n");
+        builder.append("Common list: ");
+        builder.append(System.lineSeparator());
         List<Territory> listToShow = sorter.sortTerritories(map.getMapAsHashMap());
         for (Territory territory : listToShow) {
-            builder.append("\n");
+            builder.append(System.lineSeparator());
             builder.append(territory.getName());
-            builder.append("\n");
+            builder.append(System.lineSeparator());
         }
         return builder.toString();
     }
@@ -127,43 +128,39 @@ public class Service {
     // }
 
     public String getListOfSubunitsOnID(String id) {
-        return getListOfSubunits(id, 1);
+        Territory territory = map.getTerritoryOnID(id);
+        return territory.getName() + System.lineSeparator() + getListOfSubunits(territory, 1);
     }
 
-    private String getListOfSubunits(String id, int depth) {
-        if (map.getTerritoryOnID(id).getSubunits() == null) {
+    private String getListOfSubunits(Territory territory, int depth) {
+        if (territory.getSubunits() == null) {
             return "";
         }
         StringBuilder builder = new StringBuilder();
         TerritorySorter sorter = new TerritorySorter();
         String tab = "\t";
-        builder.append(map.getTerritoryOnID(id).getName());
-        builder.append("\n");
-        List<Territory> listToShow = sorter.sortTerritories(map.getTerritoryOnID(id).getSubunits());
-        for (Territory territory : listToShow) {
+        // builder.append(territory.getName());
+        // builder.append(System.lineSeparator());
+        List<Territory> subunits = sorter.sortTerritories(territory.getSubunits());
+        for (Territory subunit : subunits) {
             builder.append(tab.repeat(depth));
-            builder.append(territory.getName());
-            builder.append("\n");
-            List<Territory> subUnitsToShow = sorter.sortTerritories(territory.getSubunits());
-            for (Territory subunit : subUnitsToShow) {
-                builder.append(tab.repeat(depth + 1));
-                builder.append(subunit.getName());
-                builder.append("\n");
-                builder.append(getListOfSubunits(map.getTerritoryID(subunit), depth + 1));
-            }
+            builder.append(subunit.getName());
+            builder.append(System.lineSeparator());
+            builder.append(getListOfSubunits(subunit, depth + 1));
         }
         return builder.toString();
     }
 
     private String printResult(List<Territory> result) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Result: \n");
+        builder.append("Result: ");
+        builder.append(System.lineSeparator());
         if (result.size() == 0) {
             builder.append("Not found");
         }
         for (Territory territory : result) {
             builder.append(territory);
-            builder.append("\n");
+            builder.append(System.lineSeparator());
         }
         return builder.toString();
     }

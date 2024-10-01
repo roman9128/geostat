@@ -88,7 +88,8 @@ public class Territory {
     private String printNumericalData() {
         StringBuilder builder = new StringBuilder();
         for (HashMap.Entry<String, Long> entry : numericalData.entrySet()) {
-            builder.append("\n\t");
+            builder.append(System.lineSeparator());
+            builder.append("\t");
             builder.append(entry.getKey());
             builder.append(": ");
             builder.append(entry.getValue());
@@ -102,18 +103,22 @@ public class Territory {
         builder.append("name: ");
         builder.append(name);
         if (capital != null) {
-            builder.append(",\ncapital: ");
+            builder.append(",");
+            builder.append(System.lineSeparator());
+            builder.append("capital: ");
             builder.append(getCapitalName());
         } else {
             builder.append("");
         }
-        builder.append(",\nnumerical data: ");
+        builder.append(",");
+        builder.append(System.lineSeparator());
+        builder.append("numerical data: ");
         if (numericalData == null) {
             builder.append("no information");
         } else {
             builder.append(printNumericalData());
         }
-        builder.append("\n");
+        builder.append(System.lineSeparator());
         return builder.toString();
     }
 }
