@@ -1,12 +1,10 @@
 package model;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.data_preparation.AdditionalInfoLoader;
-import model.data_preparation.BasicInfoLoader;
+import model.data_preparation.MapPreparationService;
 import model.map.Map;
 import model.map.TerritorySorter;
 import model.territory.Territory;
@@ -15,11 +13,12 @@ import model.territory_set.TerritorySet;
 import model.types.Operator;
 
 public class Service {
+    private final String LANGUAGE;
     private Map map;
 
-    public Service() {
-        map = getPreparedMap("bd.csv");
-        map = addAdditionalInfo("nd.csv");
+    public Service(String language) {
+        this.LANGUAGE = language; // нужно из файла подтягивать язык
+        map = new MapPreparationService().loadAndPrepareData();
     }
 
     public void createTerritorySet(String setName) {
@@ -105,28 +104,6 @@ public class Service {
         return builder.toString();
     }
 
-    // public String getList() {
-    // StringBuilder builder = new StringBuilder();
-    // TerritorySorter sorter = new TerritorySorter();
-    // builder.append("Common list: \n");
-    // List<Territory> listToShow = sorter.sortTerritories(map.getMapAsHashMap());
-    // for (Territory territory : listToShow) {
-    // builder.append("\n");
-    // builder.append(territory.getName());
-    // builder.append("\n");
-    // // builder.append(getSortedListOfSubunits(map.getTerritoryID(territory)));
-    // List<Territory> subUnitsToShow =
-    // sorter.sortTerritories(territory.getSubunits());
-    // for (Territory subunit : subUnitsToShow) {
-    // builder.append("\n\t");
-    // builder.append(subunit.getName());
-    // builder.append("\n\t");
-    // builder.append(getSortedListOfSubunits(map.getTerritoryID(subunit)));
-    // }
-    // }
-    // return builder.toString();
-    // }
-
     public String getListOfSubunitsOnID(String id) {
         Territory territory = map.getTerritoryOnID(id);
         return territory.getName() + System.lineSeparator() + getListOfSubunits(territory, 1);
@@ -139,8 +116,6 @@ public class Service {
         StringBuilder builder = new StringBuilder();
         TerritorySorter sorter = new TerritorySorter();
         String tab = "\t";
-        // builder.append(territory.getName());
-        // builder.append(System.lineSeparator());
         List<Territory> subunits = sorter.sortTerritories(territory.getSubunits());
         for (Territory subunit : subunits) {
             builder.append(tab.repeat(depth));
@@ -165,11 +140,4 @@ public class Service {
         return builder.toString();
     }
 
-    private Map getPreparedMap(String path) {
-        return new BasicInfoLoader(new File(path)).sendMap();
-    }
-
-    private Map addAdditionalInfo(String path) {
-        return new AdditionalInfoLoader(map, new File(path)).sendMap();
-    }
 }

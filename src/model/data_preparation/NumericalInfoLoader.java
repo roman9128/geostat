@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 import model.map.Map;
 
-public class AdditionalInfoLoader {
+public class NumericalInfoLoader {
     private Map map;
 
-    public AdditionalInfoLoader(Map map, File file) {
+    public NumericalInfoLoader(Map map, File file) {
         this.map = map;
         loadUserData(file);
     }

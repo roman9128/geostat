@@ -4,19 +4,19 @@ import java.io.File;
 import java.util.HashMap;
 
 public class Localizator extends DataLoader {
-    private HashMap<String, String> names;
+    private HashMap<String, String> translation;
 
-    public Localizator(String language) {
-        names = new HashMap<>();
-        loadData(new File(language + ".txt"));
+    public Localizator(File localizationFile) {
+        translation = new HashMap<>();
+        loadData(localizationFile);
     }
 
     @Override
-    void addInfoAboutTerritory(String[] data) {
-        names.put(data[0], data[1]);
+    public void sendInfoFrom(String[] data) {
+        translation.put(data[0], data[1]);
     }
 
     public HashMap<String, String> getLocalization() {
-        return names;
+        return translation;
     }
 }

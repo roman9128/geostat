@@ -100,17 +100,17 @@ public class Map {
     public List<Territory> findByLevel(Operator operator, int number) {
         List<Territory> result = new ArrayList<>();
         for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-            if (operator.equals(Operator.equal)) {
+            if (operator.equals(Operator.EQUAL)) {
                 if (entry.getValue().getLevel() == number) {
                     result.add(entry.getValue());
                 }
             }
-            if (operator.equals(Operator.less)) {
+            if (operator.equals(Operator.LESS)) {
                 if (entry.getValue().getLevel() < number) {
                     result.add(entry.getValue());
                 }
             }
-            if (operator.equals(Operator.more)) {
+            if (operator.equals(Operator.MORE)) {
                 if (entry.getValue().getLevel() > number) {
                     result.add(entry.getValue());
                 }
@@ -124,17 +124,17 @@ public class Map {
         List<Territory> result = new ArrayList<>();
         try {
             for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-                if (operator.equals(Operator.equal)) {
+                if (operator.equals(Operator.EQUAL)) {
                     if (entry.getValue().getNumericalData().get(dataName) == number) {
                         result.add(entry.getValue());
                     }
                 }
-                if (operator.equals(Operator.less)) {
+                if (operator.equals(Operator.LESS)) {
                     if (entry.getValue().getNumericalData().get(dataName) < number) {
                         result.add(entry.getValue());
                     }
                 }
-                if (operator.equals(Operator.more)) {
+                if (operator.equals(Operator.MORE)) {
                     if (entry.getValue().getNumericalData().get(dataName) > number) {
                         result.add(entry.getValue());
                     }

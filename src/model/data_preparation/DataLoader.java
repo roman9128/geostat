@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public abstract class DataLoader {
+abstract public class DataLoader {
 
     public DataLoader() {
     }
@@ -16,7 +16,7 @@ public abstract class DataLoader {
             while (scanner.hasNextLine()) {
                 try {
                     String[] data = scanner.nextLine().split(";");
-                    addInfoAboutTerritory(data);
+                    sendInfoFrom(data);
                 } catch (Exception e) {
                     System.out.println("There are wrong data in datafile");
                 }
@@ -28,5 +28,5 @@ public abstract class DataLoader {
         }
     }
 
-    abstract void addInfoAboutTerritory(String[] data);
+    abstract protected void sendInfoFrom(String[] data);
 }
