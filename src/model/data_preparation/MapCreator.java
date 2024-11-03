@@ -10,10 +10,12 @@ import model.territory.TerritoryType;
 public class MapCreator extends DataLoader {
 
     private Map loadedMap;
+    private HashMap<String, String> localizedNames;
 
-    public MapCreator(File file) {
+    public MapCreator(File idTypeCapital, File names) {
         loadedMap = new Map();
-        loadData(file);
+        localizedNames = new Localizator(names).getLocalization();
+        loadData(idTypeCapital);
         organize();
     }
 
@@ -27,15 +29,19 @@ public class MapCreator extends DataLoader {
 
     @Override
     protected void sendInfoFrom(String[] data) {
-        addTerritory(sendID(data), sendTerritoryType(data), sendCapital(data));
+        addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
-    private void addTerritory(String id, TerritoryType type, HashMap<String, Territory> capital) {
-        loadedMap.addToMap(id, new Territory(id + "-id", type, capital));
+    private void addTerritory(String id, String name, TerritoryType type, HashMap<String, Territory> capital) {
+        loadedMap.addToMap(id, new Territory(name, type, capital));
     }
 
     private String sendID(String[] data) {
         return data[0];
+    }
+
+    private String sendName(String[] data) {
+        return localizedNames.get(data[0]);
     }
 
     private TerritoryType sendTerritoryType(String[] data) {
@@ -76,7 +82,7 @@ public class MapCreator extends DataLoader {
         private void setCapital(HashMap.Entry<String, Territory> entry) {
             try {
                 entry.getValue().setCapital(entry.getValue().getCapitalID(),
-                loadedMap.getTerritoryOnID(entry.getValue().getCapitalID()));
+                        loadedMap.getTerritoryOnID(entry.getValue().getCapitalID()));
             } catch (Exception e) {
 
             }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import model.data_preparation.MapPreparationService;
+import model.data_preparation.DataPreparationService;
 import model.map.Map;
 import model.map.TerritorySorter;
 import model.territory.Territory;
@@ -13,12 +13,12 @@ import model.territory_set.TerritorySet;
 import model.types.Operator;
 
 public class Service {
-    private final String LANGUAGE;
+    private String language;
     private Map map;
 
     public Service(String language) {
-        this.LANGUAGE = language; // нужно из файла подтягивать язык
-        map = new MapPreparationService().loadAndPrepareData();
+        this.language = language; // нужно из файла подтягивать язык
+        map = new DataPreparationService(language).loadAndPrepareData();
     }
 
     public void createTerritorySet(String setName) {
