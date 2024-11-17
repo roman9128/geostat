@@ -4,16 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import rt.model.enums.Operator;
+import rt.model.enums.TerritoryType;
 import rt.model.territory.Territory;
-import rt.model.territory.TerritoryType;
 import rt.model.territory.comparators.ComparatorByName;
 import rt.model.territory_set.TerritorySet;
-import rt.model.types.Operator;
 
 public class Map {
     private HashMap<String, Territory> map;
     private HashMap<String, TerritorySet> sets;
-    private String[] userDataNames;
+    // private String[] userDataNames;
 
     public Map() {
         map = new HashMap<String, Territory>();
@@ -42,13 +42,13 @@ public class Map {
         removeSet(previousSetName);
     }
 
-    public String[] getUserDataNames() {
-        return userDataNames;
-    }
+    // public String[] getUserDataNames() {
+    //     return userDataNames;
+    // }
 
-    public void setUserDataNames(String[] userDataNames) {
-        this.userDataNames = userDataNames;
-    }
+    // public void setUserDataNames(String[] userDataNames) {
+    //     this.userDataNames = userDataNames;
+    // }
 
     public void addToMap(String id, Territory territory) {
         map.put(id, territory);

@@ -7,15 +7,20 @@ public class Localizator extends XLSXDataLoader {
 
     public Localizator(String localizationFile) {
         translation = new HashMap<>();
-        loadData(localizationFile);
+        loadData(localizationFile, false);
     }
 
     @Override
-    public void send(String[] data) {
-        translation.put(data[0], data[1]);
+    public void sendData(Object[] data) {
+        translation.put(data[0].toString(), data[1].toString());
     }
 
     public HashMap<String, String> getLocalization() {
         return translation;
+    }
+
+    @Override
+    protected void sendTitle(Object[] title) {
+        //
     }
 }

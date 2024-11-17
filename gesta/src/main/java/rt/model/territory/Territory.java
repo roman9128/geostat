@@ -2,6 +2,8 @@ package rt.model.territory;
 
 import java.util.HashMap;
 
+import rt.model.enums.TerritoryType;
+
 public class Territory {
 
     private String name;

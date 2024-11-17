@@ -7,22 +7,34 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public abstract class XLSXDataLoader {
 
-    public void loadData(String path) {
+    public void loadData(String path, boolean titleIsNeeded) {
         try (Workbook workbook = new XSSFWorkbook(new FileInputStream(path))) {
             Sheet sheet = workbook.getSheetAt(0);
-            for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) { // пропускаю первую строку, т.к. она для заголовков
-                Row row = sheet.getRow(i);
-                int size = row.getPhysicalNumberOfCells();
-                String[] data = new String[size];
-                for (int j = 0; j < size; j++) {
-                    data[j] = row.getCell(j).getStringCellValue();
-                }
-                send(data);
+            if (titleIsNeeded) {
+                sendTitle(makeArrayToSend(sheet.getRow(0)));
             }
+            for (int i = 1; i < sheet.getPhysicalNumberOfRows(); i++) { // 1 строка для заголовка
+                sendData(makeArrayToSend(sheet.getRow(i)));
+            }
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    protected abstract void send(String[] data);
+    private Object[] makeArrayToSend(Row row) {
+        int size = row.getPhysicalNumberOfCells();
+        Object[] data = new Object[size];
+        for (int j = 0; j < size; j++) {
+            switch (row.getCell(j).getCellType()) {
+                case NUMERIC -> data[j] = Double.valueOf(row.getCell(j).getNumericCellValue()).longValue();
+                default -> data[j] = row.getCell(j).toString();
+            }
+        }
+        return data;
+    }
+
+    protected abstract void sendTitle(Object[] title);
+
+    protected abstract void sendData(Object[] data);
 }

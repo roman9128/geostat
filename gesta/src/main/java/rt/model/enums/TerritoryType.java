@@ -1,4 +1,4 @@
-package rt.model.territory;
+package rt.model.enums;
 
 public enum TerritoryType {
     COUNTRY,

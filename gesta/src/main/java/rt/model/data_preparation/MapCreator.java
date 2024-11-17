@@ -3,9 +3,9 @@ package rt.model.data_preparation;
 import java.io.File;
 import java.util.HashMap;
 
+import rt.model.enums.TerritoryType;
 import rt.model.map.Map;
 import rt.model.territory.Territory;
-import rt.model.territory.TerritoryType;
 
 public class MapCreator extends DataLoader {
 

@@ -7,7 +7,7 @@ public class DataPreparationService {
     private Map loadedMap;
     private final String ID_TYPE_CAPITAL = "bd.csv";
     private final String NAMES;
-    private final String NUMERICAL_INFO = "nd.csv";
+    private final String NUMERICAL_INFO = "nd.xlsx";
     // private final String NUM_PROPORTION_INFO = "pd.csv";
     // private final String TEXT_INFO = "td.csv";
 

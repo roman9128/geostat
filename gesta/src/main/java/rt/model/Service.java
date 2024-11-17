@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import rt.model.data_preparation.DataPreparationService;
+import rt.model.enums.Operator;
+import rt.model.enums.TerritoryType;
 import rt.model.map.Map;
 import rt.model.map.TerritorySorter;
 import rt.model.territory.Territory;
-import rt.model.territory.TerritoryType;
 import rt.model.territory_set.TerritorySet;
-import rt.model.types.Operator;
 
 public class Service {
     private String language;
@@ -57,9 +57,9 @@ public class Service {
         map.removeSet(setName);
     }
 
-    public String[] getNumericalDataNames() {
-        return map.getUserDataNames();
-    }
+    // public String[] getNumericalDataNames() {
+    //     return map.getUserDataNames();
+    // }
 
     public String findByName(String name) {
         List<Territory> result = map.findByName(name);
