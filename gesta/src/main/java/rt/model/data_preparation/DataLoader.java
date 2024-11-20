@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+@Deprecated
 abstract public class DataLoader {
 
-    void loadData(File file) {
-        try {
-            Scanner scanner = new Scanner(file);
+    void loadData(String path) {
+        File file = new File(path);
+        try (Scanner scanner = new Scanner(file)) {
             scanner.nextLine();
             while (scanner.hasNextLine()) {
                 try {
@@ -21,7 +22,7 @@ abstract public class DataLoader {
             scanner.close();
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

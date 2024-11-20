@@ -2,10 +2,10 @@ package rt.model.data_preparation;
 
 import rt.model.map.Map;
 
-public class DataPreparationService {
+public final class DataPreparationService {
 
     private Map loadedMap;
-    private final String ID_TYPE_CAPITAL = "bd.csv";
+    private final String ID_TYPE_CAPITAL = "bd.xlsx";
     private final String NAMES;
     private final String NUMERICAL_INFO = "nd.xlsx";
     // private final String NUM_PROPORTION_INFO = "pd.csv";

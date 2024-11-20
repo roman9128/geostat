@@ -1,13 +1,12 @@
 package rt.model.data_preparation;
 
-import java.io.File;
 import java.util.HashMap;
 
 import rt.model.enums.TerritoryType;
 import rt.model.map.Map;
 import rt.model.territory.Territory;
 
-public class MapCreator extends DataLoader {
+public class MapCreator extends XLSXDataLoader {
 
     private Map loadedMap;
     private HashMap<String, String> localizedNames;
@@ -15,7 +14,7 @@ public class MapCreator extends DataLoader {
     public MapCreator(String idTypeCapital, String names) {
         loadedMap = new Map();
         localizedNames = new Localizator(names).getLocalization();
-        loadData(new File(idTypeCapital));
+        loadData(idTypeCapital, false);
         organize();
     }
 
@@ -28,7 +27,11 @@ public class MapCreator extends DataLoader {
     }
 
     @Override
-    protected void sendInfoFrom(String[] data) {
+    protected void sendData(Object[] dataAsObject) {
+        String[] data = new String[dataAsObject.length];
+        for (int i = 0; i < data.length; i++) {
+            data[i] = (String) dataAsObject[i];
+        }
         addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
@@ -41,7 +44,11 @@ public class MapCreator extends DataLoader {
     }
 
     private String sendName(String[] data) {
-        return localizedNames.get(data[0]);
+        if (localizedNames.get(data[0]) == null) {
+            return data[0] + "-id";
+        } else {
+            return localizedNames.get(data[0]);
+        }
     }
 
     private TerritoryType sendTerritoryType(String[] data) {
@@ -49,12 +56,17 @@ public class MapCreator extends DataLoader {
     }
 
     private HashMap<String, Territory> sendCapital(String[] data) {
-        if (!data[2].equals("0")) {
+        if (!data[2].equals("null")) {
             HashMap<String, Territory> capital = new HashMap<>();
             capital.put(data[2], null);
             return capital;
         }
         return null;
+    }
+
+    @Override
+    protected void sendTitle(Object[] title) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private class MapOrganizer {

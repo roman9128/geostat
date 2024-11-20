@@ -33,7 +33,7 @@ public class TerritorySet {
             numericalData = new HashMap<>();
         }
         for (HashMap.Entry<String, Territory> territoryEntry : territories.entrySet()) {
-            for (HashMap.Entry<String, Long> entry : territoryEntry.getValue().getNumericalData().entrySet()) {
+            for (HashMap.Entry<String, Long> entry : territoryEntry.getValue().getNumericData().entrySet()) {
                 if (dataToAdd.get(entry.getKey()) == null) {
                     dataToAdd.put(entry.getKey(), 0l);
                 }

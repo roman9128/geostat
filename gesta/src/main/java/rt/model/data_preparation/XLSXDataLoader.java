@@ -7,7 +7,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public abstract class XLSXDataLoader {
 
-    public void loadData(String path, boolean titleIsNeeded) {
+    public final void loadData(String path, boolean titleIsNeeded) {
         try (Workbook workbook = new XSSFWorkbook(new FileInputStream(path))) {
             Sheet sheet = workbook.getSheetAt(0);
             if (titleIsNeeded) {

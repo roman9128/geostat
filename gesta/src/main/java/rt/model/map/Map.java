@@ -125,17 +125,17 @@ public class Map {
         try {
             for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
                 if (operator.equals(Operator.EQUAL)) {
-                    if (entry.getValue().getNumericalData().get(dataName) == number) {
+                    if (entry.getValue().getNumericData().get(dataName) == number) {
                         result.add(entry.getValue());
                     }
                 }
                 if (operator.equals(Operator.LESS)) {
-                    if (entry.getValue().getNumericalData().get(dataName) < number) {
+                    if (entry.getValue().getNumericData().get(dataName) < number) {
                         result.add(entry.getValue());
                     }
                 }
                 if (operator.equals(Operator.MORE)) {
-                    if (entry.getValue().getNumericalData().get(dataName) > number) {
+                    if (entry.getValue().getNumericData().get(dataName) > number) {
                         result.add(entry.getValue());
                     }
                 }
@@ -160,8 +160,8 @@ public class Map {
                 largerNumber = number2;
             }
             for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-                if (smallerNumber <= entry.getValue().getNumericalData().get(dataName)
-                        && entry.getValue().getNumericalData().get(dataName) <= largerNumber) {
+                if (smallerNumber <= entry.getValue().getNumericData().get(dataName)
+                        && entry.getValue().getNumericData().get(dataName) <= largerNumber) {
                     result.add(entry.getValue());
                 }
             }

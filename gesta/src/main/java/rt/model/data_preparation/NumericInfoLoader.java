@@ -1,10 +1,9 @@
 package rt.model.data_preparation;
 
-import java.util.Arrays;
-
 import rt.model.map.Map;
 
 public class NumericInfoLoader extends XLSXDataLoader {
+
     private Map map;
     private String[] dataNames;
 
@@ -24,7 +23,6 @@ public class NumericInfoLoader extends XLSXDataLoader {
     // }
     // map.setUserDataNames(dataNamesToShow);
     // }
-
     @Override
     protected void sendTitle(Object[] title) {
         String[] titleString = new String[title.length];
@@ -45,9 +43,9 @@ public class NumericInfoLoader extends XLSXDataLoader {
         }
         for (int i = 1; i < dataNames.length; i++) {
             if (data[i] != null) {
-                map.getMapAsHashMap().get(data[0]).setNumericalData(dataNames[i], ((Long) data[i]));
+                map.getMapAsHashMap().get((String) data[0]).setNumericData(dataNames[i], ((Long) data[i]));
             } else {
-                map.getMapAsHashMap().get(data[0]).setNumericalData(dataNames[i], 0);
+                map.getMapAsHashMap().get((String) data[0]).setNumericData(dataNames[i], 0);
             }
         }
     }

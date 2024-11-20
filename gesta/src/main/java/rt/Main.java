@@ -2,7 +2,6 @@ package rt;
 
 import rt.model.Service;
 import rt.model.enums.Operator;
-import rt.model.enums.TerritoryType;
 
 public class Main {
     public static void main(String[] args) {
