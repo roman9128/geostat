@@ -12,7 +12,7 @@ public class Localizator extends XLSXDataLoader {
 
     @Override
     public void sendData(String[] data) {
-        translation.put(data[0].toString(), data[1].toString());
+        translation.put(data[0], data[1]);
     }
 
     public HashMap<String, String> getLocalization() {

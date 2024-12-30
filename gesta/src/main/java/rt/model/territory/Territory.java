@@ -121,6 +121,18 @@ public class Territory {
         this.textInfo.put(textID, textValue);
     }
 
+    private String printTextData() {
+        StringBuilder builder = new StringBuilder();
+        for (HashMap.Entry<String, String> entry : textInfo.entrySet()) {
+            builder.append(System.lineSeparator());
+            builder.append("\t");
+            builder.append(entry.getKey());
+            builder.append(": ");
+            builder.append(entry.getValue());
+        }
+        return builder.toString();
+    }
+
     // endregion
     @Override
     public String toString() {
@@ -149,7 +161,7 @@ public class Territory {
         if (textInfo == null) {
             builder.append("no information");
         } else {
-            builder.append(textInfo);
+            builder.append(printTextData());
         }
 
         builder.append(System.lineSeparator());

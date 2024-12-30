@@ -18,12 +18,24 @@ public class TextInfoLoader extends XLSXDataLoader {
 
     @Override
     protected void sendTitle(String[] title) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String[] titleString = new String[title.length];
+        System.arraycopy(title, 0, titleString, 0, title.length);
+        dataNames = titleString;
     }
 
     @Override
     protected void sendData(String[] data) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (dataNames.length > data.length) {
+            String[] dataSubstitute = new String[dataNames.length];
+            System.arraycopy(data, 0, dataSubstitute, 0, data.length);
+            data = dataSubstitute;
+        }
+        for (int i = 1; i < dataNames.length; i++) {
+            if (data[i] != null) {
+                map.getMapAsHashMap().get(data[0]).setTextInfo(dataNames[i], data[i]);
+            } else {
+                map.getMapAsHashMap().get(data[0]).setTextInfo(dataNames[i], "");
+            }
+        }
     }
-
 }

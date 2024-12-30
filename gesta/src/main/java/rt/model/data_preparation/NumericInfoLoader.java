@@ -31,7 +31,7 @@ public class NumericInfoLoader extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendData(String[] data) {
+    protected void sendData(String[] data) { // extract to method
         if (dataNames.length > data.length) {
             String[] dataSubstitute = new String[dataNames.length];
             System.arraycopy(data, 0, dataSubstitute, 0, data.length);
