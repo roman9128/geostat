@@ -27,7 +27,7 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendData(Object[] dataAsObject) {
+    protected void sendData(String[] dataAsObject) {
         String[] data = new String[dataAsObject.length];
         for (int i = 0; i < data.length; i++) {
             data[i] = (String) dataAsObject[i];
@@ -65,7 +65,7 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendTitle(Object[] title) {
+    protected void sendTitle(String[] title) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

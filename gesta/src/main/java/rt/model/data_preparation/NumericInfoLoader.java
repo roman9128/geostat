@@ -24,28 +24,24 @@ public class NumericInfoLoader extends XLSXDataLoader {
     // map.setUserDataNames(dataNamesToShow);
     // }
     @Override
-    protected void sendTitle(Object[] title) {
+    protected void sendTitle(String[] title) {
         String[] titleString = new String[title.length];
-        for (int i = 0; i < title.length; i++) {
-            titleString[i] = title[i].toString();
-        }
+        System.arraycopy(title, 0, titleString, 0, title.length);
         dataNames = titleString;
     }
 
     @Override
-    protected void sendData(Object[] data) {
+    protected void sendData(String[] data) {
         if (dataNames.length > data.length) {
-            Object[] dataSubstitute = new Object[dataNames.length];
-            for (int i = 0; i < data.length; i++) {
-                dataSubstitute[i] = data[i];
-            }
+            String[] dataSubstitute = new String[dataNames.length];
+            System.arraycopy(data, 0, dataSubstitute, 0, data.length);
             data = dataSubstitute;
         }
         for (int i = 1; i < dataNames.length; i++) {
             if (data[i] != null) {
-                map.getMapAsHashMap().get((String) data[0]).setNumericData(dataNames[i], ((Long) data[i]));
+                map.getMapAsHashMap().get(data[0]).setNumericData(dataNames[i], (Long.parseLong(data[i])));
             } else {
-                map.getMapAsHashMap().get((String) data[0]).setNumericData(dataNames[i], 0);
+                map.getMapAsHashMap().get(data[0]).setNumericData(dataNames[i], 0);
             }
         }
     }

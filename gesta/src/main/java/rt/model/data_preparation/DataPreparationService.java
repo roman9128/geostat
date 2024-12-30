@@ -9,7 +9,7 @@ public final class DataPreparationService {
     private final String NAMES;
     private final String NUMERICAL_INFO = "nd.xlsx";
     // private final String NUM_PROPORTION_INFO = "pd.csv";
-    // private final String TEXT_INFO = "td.csv";
+    private final String TEXT_INFO = "td.csv";
 
     public DataPreparationService(String language) {
         NAMES = language + "names.xlsx";
@@ -20,7 +20,7 @@ public final class DataPreparationService {
         addBasicInfoToMap();
         addNumericalInfo();
         // addNumericalProportionalInfo(NUM_PROPORTION_INFO);
-        // addTextInfo(TEXT_INFO);
+        // addTextInfo();
         return loadedMap;
     }
 
@@ -36,7 +36,7 @@ public final class DataPreparationService {
         //
     }
 
-    private void addTextInfo(String textInfo) {
-        //
+    private void addTextInfo() {
+        loadedMap = new TextInfoLoader(loadedMap, TEXT_INFO).sendMap();
     }
 }

@@ -11,7 +11,7 @@ public class Localizator extends XLSXDataLoader {
     }
 
     @Override
-    public void sendData(Object[] data) {
+    public void sendData(String[] data) {
         translation.put(data[0].toString(), data[1].toString());
     }
 
@@ -20,7 +20,7 @@ public class Localizator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendTitle(Object[] title) {
+    protected void sendTitle(String[] title) {
         //
     }
 }

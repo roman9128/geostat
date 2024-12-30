@@ -2,7 +2,9 @@ package rt.model.data_preparation;
 
 import java.io.FileInputStream;
 
-import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public abstract class XLSXDataLoader {
@@ -22,19 +24,19 @@ public abstract class XLSXDataLoader {
         }
     }
 
-    private Object[] makeArrayToSend(Row row) {
+    private String[] makeArrayToSend(Row row) {
         int size = row.getPhysicalNumberOfCells();
-        Object[] data = new Object[size];
+        String[] data = new String[size];
         for (int j = 0; j < size; j++) {
             switch (row.getCell(j).getCellType()) {
-                case NUMERIC -> data[j] = Double.valueOf(row.getCell(j).getNumericCellValue()).longValue();
+                case NUMERIC -> data[j] = String.valueOf(Double.valueOf(row.getCell(j).getNumericCellValue()).longValue());
                 default -> data[j] = row.getCell(j).toString();
             }
         }
         return data;
     }
 
-    protected abstract void sendTitle(Object[] title);
+    protected abstract void sendTitle(String[] title);
 
-    protected abstract void sendData(Object[] data);
+    protected abstract void sendData(String[] data);
 }
