@@ -3,17 +3,18 @@ package rt.model.data_preparation;
 import java.util.HashMap;
 
 import rt.model.enums.TerritoryType;
+import rt.model.localizator.CommonLocalizator;
 import rt.model.map.Map;
 import rt.model.territory.Territory;
 
 public class MapCreator extends XLSXDataLoader {
 
     private Map loadedMap;
-    private HashMap<String, String> localizedNames;
+    private CommonLocalizator localizator;
 
-    public MapCreator(String idTypeCapital, String names) {
+    public MapCreator(String idTypeCapital, CommonLocalizator localizator) {
+        this.localizator = localizator;
         loadedMap = new Map();
-        localizedNames = new Localizator(names).getLocalization();
         loadData(idTypeCapital, false);
         organize();
     }
@@ -27,11 +28,7 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendData(String[] dataAsObject) {
-        String[] data = new String[dataAsObject.length];
-        for (int i = 0; i < data.length; i++) {
-            data[i] = (String) dataAsObject[i];
-        }
+    protected void sendData(String[] data) {
         addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
@@ -44,10 +41,10 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     private String sendName(String[] data) {
-        if (localizedNames.get(data[0]) == null) {
+        if (localizator.getLocalizedText(data[0]) == null) {
             return data[0] + "-id";
         } else {
-            return localizedNames.get(data[0]);
+            return localizator.getLocalizedText(data[0]);
         }
     }
 
@@ -66,7 +63,7 @@ public class MapCreator extends XLSXDataLoader {
 
     @Override
     protected void sendTitle(String[] title) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //
     }
 
     private class MapOrganizer {

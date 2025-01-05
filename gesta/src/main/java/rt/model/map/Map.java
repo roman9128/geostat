@@ -11,12 +11,13 @@ import rt.model.territory.comparators.ComparatorByName;
 import rt.model.territory_set.TerritorySet;
 
 public class Map {
+
     private HashMap<String, Territory> map;
     private HashMap<String, TerritorySet> sets;
     // private String[] userDataNames;
 
     public Map() {
-        map = new HashMap<String, Territory>();
+        map = new HashMap<>();
     }
 
     public HashMap<String, TerritorySet> getSet() {
@@ -25,7 +26,7 @@ public class Map {
 
     public void addSet(String setName, TerritorySet terrSet) {
         if (sets == null) {
-            sets = new HashMap<String, TerritorySet>();
+            sets = new HashMap<>();
         }
         this.sets.put(setName, terrSet);
     }
@@ -45,11 +46,9 @@ public class Map {
     // public String[] getUserDataNames() {
     //     return userDataNames;
     // }
-
     // public void setUserDataNames(String[] userDataNames) {
     //     this.userDataNames = userDataNames;
     // }
-
     public void addToMap(String id, Territory territory) {
         map.put(id, territory);
     }
@@ -67,23 +66,30 @@ public class Map {
     }
 
     public String getTerritoryID(Territory territory) {
-        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-            if (entry.getValue().equals(territory)) {
-                return entry.getKey();
-            }
-        }
-        return null;
+        return map.entrySet().stream()
+                .filter(entry -> entry.getValue().equals(territory))
+                .map(entry -> entry.getKey())
+                .findFirst()
+                .orElse(null);
+
+        // for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
+        //     if (entry.getValue().equals(territory)) {
+        //         return entry.getKey();
+        //     }
+        // }
+        // return null;
     }
 
     public List<Territory> findByName(String name) {
-        List<Territory> result = new ArrayList<>();
-        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-            if (entry.getValue().getName().contains(name)) {
-                result.add(entry.getValue());
-            }
-        }
-        result.sort(new ComparatorByName());
-        return result;
+        return map.entrySet().stream().filter(entry -> entry.getValue().getName().contains(name)).map(entry -> entry.getValue()).toList();
+        // List<Territory> result = new ArrayList<>();
+        // for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
+        //     if (entry.getValue().getName().contains(name)) {
+        //         result.add(entry.getValue());
+        //     }
+        // }
+        // result.sort(new ComparatorByName());
+        // return result;
     }
 
     public List<Territory> findByTerritoryType(TerritoryType type) {

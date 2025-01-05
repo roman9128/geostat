@@ -7,18 +7,19 @@ import java.util.List;
 import rt.model.data_preparation.DataPreparationService;
 import rt.model.enums.Operator;
 import rt.model.enums.TerritoryType;
+import rt.model.localizator.CommonLocalizator;
 import rt.model.map.Map;
 import rt.model.map.TerritorySorter;
 import rt.model.territory.Territory;
 import rt.model.territory_set.TerritorySet;
 
 public class Service {
-    private String language;
-    private Map map;
+    private final CommonLocalizator localizator;
+    private final Map map;
 
     public Service(String language) {
-        this.language = language; // нужно из файла подтягивать язык
-        map = new DataPreparationService(language).loadAndPrepareData();
+        localizator = new CommonLocalizator(language);
+        map = new DataPreparationService(localizator).loadAndPrepareData();
     }
 
     public void createTerritorySet(String setName) {
@@ -130,7 +131,7 @@ public class Service {
         StringBuilder builder = new StringBuilder();
         builder.append("Result: ");
         builder.append(System.lineSeparator());
-        if (result.size() == 0) {
+        if (result.isEmpty()) {
             builder.append("Not found");
         }
         for (Territory territory : result) {
@@ -139,5 +140,4 @@ public class Service {
         }
         return builder.toString();
     }
-
 }
