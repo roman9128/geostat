@@ -1,19 +1,16 @@
 package rt.model.data_preparation;
 
-import rt.model.localizator.CommonLocalizator;
 import rt.model.map.Map;
 
 public final class DataPreparationService {
 
     private Map loadedMap;
-    private final CommonLocalizator localizator;
     private final String ID_TYPE_CAPITAL = "bd.xlsx";
     private final String NUMERICAL_INFO = "nd.xlsx";
     // private final String NUM_PROPORTION_INFO = "pd.csv";
     private final String TEXT_INFO = "td.xlsx";
 
-    public DataPreparationService(CommonLocalizator localizator) {
-        this.localizator = localizator;
+    public DataPreparationService() {
         loadAndPrepareData();
     }
 
@@ -26,7 +23,7 @@ public final class DataPreparationService {
     }
 
     private void addBasicInfoToMap() {
-        loadedMap = new MapCreator(ID_TYPE_CAPITAL, localizator).sendMap();
+        loadedMap = new MapCreator(ID_TYPE_CAPITAL).sendMap();
     }
 
     private void addNumericalInfo() {

@@ -10,10 +10,8 @@ import rt.model.territory.Territory;
 public class MapCreator extends XLSXDataLoader {
 
     private Map loadedMap;
-    private CommonLocalizator localizator;
 
-    public MapCreator(String idTypeCapital, CommonLocalizator localizator) {
-        this.localizator = localizator;
+    public MapCreator(String idTypeCapital) {
         loadedMap = new Map();
         loadData(idTypeCapital, false);
         organize();
@@ -41,10 +39,10 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     private String sendName(String[] data) {
-        if (localizator.getLocalizedText(data[0]) == null) {
+        if (CommonLocalizator.getLocalizedText(data[0]) == null) {
             return data[0] + "-id";
         } else {
-            return localizator.getLocalizedText(data[0]);
+            return CommonLocalizator.getLocalizedText(data[0]);
         }
     }
 

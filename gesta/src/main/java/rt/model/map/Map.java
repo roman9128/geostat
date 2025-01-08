@@ -81,49 +81,46 @@ public class Map {
     }
 
     public List<Territory> findByName(String name) {
-        return map.entrySet().stream().filter(entry -> entry.getValue().getName().contains(name)).map(entry -> entry.getValue()).toList();
-        // List<Territory> result = new ArrayList<>();
-        // for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-        //     if (entry.getValue().getName().contains(name)) {
-        //         result.add(entry.getValue());
-        //     }
-        // }
-        // result.sort(new ComparatorByName());
-        // return result;
+        return map.entrySet().stream()
+                .filter(entry -> entry.getValue().getName().contains(name))
+                .map(entry -> entry.getValue())
+                .toList();
     }
 
     public List<Territory> findByTerritoryType(TerritoryType type) {
-        List<Territory> result = new ArrayList<>();
-        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-            if (entry.getValue().getType().equals(type)) {
-                result.add(entry.getValue());
-            }
-        }
-        result.sort(new ComparatorByName());
-        return result;
+        return map.entrySet().stream()
+                .filter(entry -> entry.getValue().getType().equals(type))
+                .map(entry -> entry.getValue())
+                .toList();
     }
 
     public List<Territory> findByLevel(Operator operator, int number) {
-        List<Territory> result = new ArrayList<>();
-        for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-            if (operator.equals(Operator.EQUAL)) {
-                if (entry.getValue().getLevel() == number) {
-                    result.add(entry.getValue());
-                }
+        switch (operator) {
+            case EQUAL -> {
+                return map.entrySet().stream()
+                        .filter(entry -> entry.getValue().getLevel() == number)
+                        .map(entry -> entry.getValue())
+                        .sorted(new ComparatorByName())
+                        .toList();
             }
-            if (operator.equals(Operator.LESS)) {
-                if (entry.getValue().getLevel() < number) {
-                    result.add(entry.getValue());
-                }
+            case LESS -> {
+                return map.entrySet().stream()
+                        .filter(entry -> entry.getValue().getLevel() < number)
+                        .map(entry -> entry.getValue())
+                        .sorted(new ComparatorByName())
+                        .toList();
             }
-            if (operator.equals(Operator.MORE)) {
-                if (entry.getValue().getLevel() > number) {
-                    result.add(entry.getValue());
-                }
+            case MORE -> {
+                return map.entrySet().stream()
+                        .filter(entry -> entry.getValue().getLevel() > number)
+                        .map(entry -> entry.getValue())
+                        .sorted(new ComparatorByName())
+                        .toList();
+            }
+            default -> {
+                return new ArrayList<>();
             }
         }
-        result.sort(new ComparatorByName());
-        return result;
     }
 
     public List<Territory> findByParameter(String dataName, Operator operator, long number) {

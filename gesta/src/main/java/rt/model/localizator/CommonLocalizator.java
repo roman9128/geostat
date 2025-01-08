@@ -6,7 +6,7 @@ import rt.model.data_preparation.XLSXDataLoader;
 
 public class CommonLocalizator extends XLSXDataLoader {
 
-    private final HashMap<String, String> localizedText;
+    private static HashMap<String, String> localizedText;
 
     public CommonLocalizator(String language) {
         localizedText = new HashMap<>();
@@ -14,8 +14,12 @@ public class CommonLocalizator extends XLSXDataLoader {
         loadData(language + "text.xlsx", false);
     }
 
-    public String getLocalizedText(String id) {
-        return localizedText.get(id);
+    public static String getLocalizedText(String id) {
+        if (localizedText.get(id) == null) {
+            return id;
+        } else {
+            return localizedText.get(id);
+        }
     }
 
     @Override

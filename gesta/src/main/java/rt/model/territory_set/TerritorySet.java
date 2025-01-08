@@ -2,29 +2,28 @@ package rt.model.territory_set;
 
 import java.util.HashMap;
 
-import rt.model.map.Map;
 import rt.model.territory.Territory;
 
 public class TerritorySet {
 
-    private HashMap<String, Territory> territories;
+    private HashMap<String, Territory> territoriesInSet;
     private HashMap<String, Long> numericalData;
 
     public TerritorySet() {
     }
 
     
-    public void addToSet(Map map, String id) {
-        if (territories == null) {
-            territories = new HashMap<>();
+    public void addToSet(String id, Territory territory) {
+        if (territoriesInSet == null) {
+            territoriesInSet = new HashMap<>();
         }
-        this.territories.put(id, map.getTerritoryOnID(id));
-        calculateNumericalDataForSet(territories);
+        this.territoriesInSet.put(id, territory);
+        calculateNumericalDataForSet(territoriesInSet);
     }
 
     public void removeFromSet (String id){
-        this.territories.remove(id);
-        calculateNumericalDataForSet(territories);
+        this.territoriesInSet.remove(id);
+        calculateNumericalDataForSet(territoriesInSet);
     }
     
     private void calculateNumericalDataForSet(HashMap<String, Territory> territories) {
@@ -45,15 +44,15 @@ public class TerritorySet {
     }
     
     public HashMap<String, Territory> getTerritories() {
-        return territories;
+        return territoriesInSet;
     }
     
     public HashMap<String, Long> getNumericalData() {
         return numericalData;
     }
     
-    public void setTerritories(HashMap<String, Territory> territories) {
-        this.territories = territories;
+    public void setTerritories(HashMap<String, Territory> territoriesInSet) {
+        this.territoriesInSet = territoriesInSet;
     }
 
     public void setNumericalData(HashMap<String, Long> numericalData) {
@@ -62,6 +61,6 @@ public class TerritorySet {
     
     @Override
     public String toString() {
-        return "includes\nterritories:\n" + territories + "\nnumerical data of set:\n" + numericalData;
+        return "includes\nterritories:\n" + territoriesInSet + "\nnumerical data of set:\n" + numericalData;
     }
 }

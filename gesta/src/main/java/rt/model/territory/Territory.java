@@ -3,6 +3,7 @@ package rt.model.territory;
 import java.util.HashMap;
 
 import rt.model.enums.TerritoryType;
+import rt.model.localizator.CommonLocalizator;
 
 public class Territory {
 
@@ -137,33 +138,33 @@ public class Territory {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("name: ");
-        builder.append(name);
+        builder.append(CommonLocalizator.getLocalizedText("NAME"))
+                .append(": ")
+                .append(name);
         if (capital != null) {
-            builder.append(",");
-            builder.append(System.lineSeparator());
-            builder.append("capital: ");
-            builder.append(getCapitalName());
+            builder.append(System.lineSeparator())
+                    .append(CommonLocalizator.getLocalizedText("CAPITAL"))
+                    .append(": ")
+                    .append(getCapitalName());
         } else {
             builder.append("");
         }
-        builder.append(",");
-        builder.append(System.lineSeparator());
-        builder.append("numeric data: ");
+        builder.append(System.lineSeparator())
+                .append(CommonLocalizator.getLocalizedText("NUMERIC"))
+                .append(": ");
         if (numericData == null) {
-            builder.append("no information");
+            builder.append(CommonLocalizator.getLocalizedText("NO_INFO"));
         } else {
             builder.append(printNumericData());
         }
-        builder.append(System.lineSeparator());
-        builder.append("text info: ");
-        // String res = (textInfo.isEmpty()) ? "no information" : textInfo.toString();
+        builder.append(System.lineSeparator())
+                .append(CommonLocalizator.getLocalizedText("TEXT"))
+                .append(": ");
         if (textInfo == null) {
-            builder.append("no information");
+            builder.append(CommonLocalizator.getLocalizedText("NO_INFO"));
         } else {
             builder.append(printTextData());
         }
-
         builder.append(System.lineSeparator());
         return builder.toString();
     }
