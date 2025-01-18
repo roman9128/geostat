@@ -12,5 +12,14 @@ public class Main {
         // System.out.println(service.getSortedListOfTerritoriesWithTheHighestLevel());
         // System.out.println(service.findByTerritoryType(TerritoryType.FEDERALDISTRICT));
         // System.out.println(service.findByName("Россия"));
+        // System.out.println(service.findByParameter("Насhjhjеление", Operator.LESS, 500000));
+        // System.out.println(service.findByParameterWithinInterval("Площадь", 1, 2));
+        // service.createTerritorySet("Черноземье");
+        // service.addTerritoryToSet("Черноземье", "RUS_CFO_ORL");
+        // service.addTerritoryToSet("Черноземье", "RUS_CFO_VOR");
+        // service.addTerritoryToSet("Черноземье", "RUS_CFO_BEL");
+        // System.out.println(service.getAllSetsInfo());
+        // service.removeTerritoryFromSet("Черноземье", "RUS_CFO_ORL");
+        // System.out.println(service.getAllSetsInfo());
     }
 }

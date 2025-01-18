@@ -26,7 +26,7 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendData(String[] data) {
+    protected void setData(String[] data) {
         addTerritory(sendID(data), sendName(data), sendTerritoryType(data), sendCapital(data));
     }
 
@@ -60,7 +60,7 @@ public class MapCreator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendTitle(String[] title) {
+    protected void setTitle(String[] title) {
         //
     }
 

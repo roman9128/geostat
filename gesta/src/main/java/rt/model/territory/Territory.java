@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import rt.model.enums.TerritoryType;
 import rt.model.localizator.CommonLocalizator;
+import rt.model.printer.HashMapPrinter;
 
 public class Territory {
 
@@ -155,7 +156,7 @@ public class Territory {
         if (numericData == null) {
             builder.append(CommonLocalizator.getLocalizedText("NO_INFO"));
         } else {
-            builder.append(printNumericData());
+            builder.append(HashMapPrinter.printHashMap(numericData));
         }
         builder.append(System.lineSeparator())
                 .append(CommonLocalizator.getLocalizedText("TEXT"))
@@ -163,7 +164,7 @@ public class Territory {
         if (textInfo == null) {
             builder.append(CommonLocalizator.getLocalizedText("NO_INFO"));
         } else {
-            builder.append(printTextData());
+            builder.append(HashMapPrinter.printHashMap(textInfo));
         }
         builder.append(System.lineSeparator());
         return builder.toString();

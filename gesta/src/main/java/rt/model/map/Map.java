@@ -1,6 +1,7 @@
 package rt.model.map;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,13 +15,13 @@ public class Map {
 
     private HashMap<String, Territory> map;
     private HashMap<String, TerritorySet> sets;
-    // private String[] userDataNames;
+    private String[] userNumericDataNames;
 
     public Map() {
         map = new HashMap<>();
     }
 
-    public HashMap<String, TerritorySet> getSet() {
+    public HashMap<String, TerritorySet> getSetsAsHashMap() {
         return sets;
     }
 
@@ -36,19 +37,21 @@ public class Map {
     }
 
     public void renameSet(String previousSetName, String newSetName) {
-        TerritorySet newSet = new TerritorySet();
-        newSet.setTerritories(getSet().get(previousSetName).getTerritories());
-        newSet.setNumericalData(getSet().get(previousSetName).getNumericalData());
+        TerritorySet newSet = new TerritorySet(newSetName);
+        newSet.setTerritories(getSetsAsHashMap().get(previousSetName).getTerritories());
+        newSet.setNumericData(getSetsAsHashMap().get(previousSetName).getNumericData());
         addSet(newSetName, newSet);
         removeSet(previousSetName);
     }
 
-    // public String[] getUserDataNames() {
-    //     return userDataNames;
-    // }
-    // public void setUserDataNames(String[] userDataNames) {
-    //     this.userDataNames = userDataNames;
-    // }
+    public String[] getUserNumericDataNames() {
+        return userNumericDataNames;
+    }
+
+    public void setUserNumericDataNames(String[] userNumericDataNames) {
+        this.userNumericDataNames = userNumericDataNames;
+    }
+
     public void addToMap(String id, Territory territory) {
         map.put(id, territory);
     }
@@ -71,13 +74,6 @@ public class Map {
                 .map(entry -> entry.getKey())
                 .findFirst()
                 .orElse(null);
-
-        // for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-        //     if (entry.getValue().equals(territory)) {
-        //         return entry.getKey();
-        //     }
-        // }
-        // return null;
     }
 
     public List<Territory> findByName(String name) {
@@ -124,35 +120,40 @@ public class Map {
     }
 
     public List<Territory> findByParameter(String dataName, Operator operator, long number) {
-        List<Territory> result = new ArrayList<>();
-        try {
-            for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-                if (operator.equals(Operator.EQUAL)) {
-                    if (entry.getValue().getNumericData().get(dataName) == number) {
-                        result.add(entry.getValue());
-                    }
+        if (Arrays.asList(userNumericDataNames).contains(dataName)) {
+            switch (operator) {
+                case MORE -> {
+                    return map.entrySet().stream()
+                            .filter(entry -> entry.getValue().getNumericData().get(dataName) > number)
+                            .map(entry -> entry.getValue())
+                            .sorted(new ComparatorByName())
+                            .toList();
                 }
-                if (operator.equals(Operator.LESS)) {
-                    if (entry.getValue().getNumericData().get(dataName) < number) {
-                        result.add(entry.getValue());
-                    }
+                case LESS -> {
+                    return map.entrySet().stream()
+                            .filter(entry -> entry.getValue().getNumericData().get(dataName) < number)
+                            .map(entry -> entry.getValue())
+                            .sorted(new ComparatorByName())
+                            .toList();
                 }
-                if (operator.equals(Operator.MORE)) {
-                    if (entry.getValue().getNumericData().get(dataName) > number) {
-                        result.add(entry.getValue());
-                    }
+                case EQUAL -> {
+                    return map.entrySet().stream()
+                            .filter(entry -> entry.getValue().getNumericData().get(dataName) == number)
+                            .map(entry -> entry.getValue())
+                            .sorted(new ComparatorByName())
+                            .toList();
+                }
+                default -> {
+                    return new ArrayList<>();
                 }
             }
-            result.sort(new ComparatorByName());
-        } catch (Exception e) {
-            System.err.println("ERROR: There's no such data name");
+        } else {
+            return new ArrayList<>();
         }
-        return result;
     }
 
     public List<Territory> findByParameterWithinInterval(String dataName, long number1, long number2) {
-        List<Territory> result = new ArrayList<>();
-        try {
+        if (Arrays.asList(userNumericDataNames).contains(dataName)) {
             long smallerNumber;
             long largerNumber;
             if (number1 > number2) {
@@ -162,16 +163,14 @@ public class Map {
                 smallerNumber = number1;
                 largerNumber = number2;
             }
-            for (HashMap.Entry<String, Territory> entry : map.entrySet()) {
-                if (smallerNumber <= entry.getValue().getNumericData().get(dataName)
-                        && entry.getValue().getNumericData().get(dataName) <= largerNumber) {
-                    result.add(entry.getValue());
-                }
-            }
-            result.sort(new ComparatorByName());
-        } catch (Exception e) {
-            System.err.println("ERROR: There's no such data name");
+            return map.entrySet().stream()
+                    .filter(entry
+                            -> smallerNumber <= entry.getValue().getNumericData().get(dataName) && entry.getValue().getNumericData().get(dataName) <= largerNumber)
+                    .map(entry -> entry.getValue())
+                    .sorted(new ComparatorByName())
+                    .toList();
+        } else {
+            return new ArrayList<>();
         }
-        return result;
     }
 }

@@ -13,25 +13,17 @@ public class NumericInfoLoader extends XLSXDataLoader {
     }
 
     public Map sendMap() {
+        map.setUserNumericDataNames(dataNames);
         return map;
     }
 
-    // private void setUserDataNames(String[] text) {
-    // String[] dataNamesToShow = new String[text.length - 1];
-    // for (int i = 1; i < text.length; i++) {
-    // dataNamesToShow[i - 1] = text[i];
-    // }
-    // map.setUserDataNames(dataNamesToShow);
-    // }
     @Override
-    protected void sendTitle(String[] title) {
-        String[] titleString = new String[title.length];
-        System.arraycopy(title, 0, titleString, 0, title.length);
-        dataNames = titleString;
+    protected void setTitle(String[] title) {
+        dataNames = title;
     }
 
     @Override
-    protected void sendData(String[] data) { // extract to method
+    protected void setData(String[] data) {
         if (dataNames.length > data.length) {
             String[] dataSubstitute = new String[dataNames.length];
             System.arraycopy(data, 0, dataSubstitute, 0, data.length);
@@ -39,7 +31,11 @@ public class NumericInfoLoader extends XLSXDataLoader {
         }
         for (int i = 1; i < dataNames.length; i++) {
             if (data[i] != null) {
-                map.getMapAsHashMap().get(data[0]).setNumericData(dataNames[i], (Long.parseLong(data[i])));
+                try { // попытка распарсить строку. в случае неудачи сохраняется ноль (не null)
+                    map.getMapAsHashMap().get(data[0]).setNumericData(dataNames[i], (Long.parseLong(data[i])));
+                } catch (NumberFormatException e) {
+                    map.getMapAsHashMap().get(data[0]).setNumericData(dataNames[i], 0);
+                }
             } else {
                 map.getMapAsHashMap().get(data[0]).setNumericData(dataNames[i], 0);
             }

@@ -17,14 +17,12 @@ public class TextInfoLoader extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendTitle(String[] title) {
-        String[] titleString = new String[title.length];
-        System.arraycopy(title, 0, titleString, 0, title.length);
-        dataNames = titleString;
+    protected void setTitle(String[] title) {
+        dataNames = title;
     }
 
     @Override
-    protected void sendData(String[] data) {
+    protected void setData(String[] data) {
         if (dataNames.length > data.length) {
             String[] dataSubstitute = new String[dataNames.length];
             System.arraycopy(data, 0, dataSubstitute, 0, data.length);

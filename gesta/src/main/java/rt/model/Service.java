@@ -2,6 +2,7 @@ package rt.model;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,31 +27,46 @@ public class Service {
     }
 
     public void createTerritorySet(String setName) {
-        map.addSet(setName, new TerritorySet());
+        map.addSet(setName, new TerritorySet(setName));
     }
 
     public void addTerritoryToSet(String setName, String id) {
-        map.getSet().get(setName).addToSet(id, map.getTerritoryOnID(id));
+        if (map.getMapAsHashMap().containsKey(id) && map.getSetsAsHashMap().containsKey(setName)) {
+            map.getSetsAsHashMap().get(setName).addToSet(id, map.getTerritoryOnID(id));
+        }
     }
 
     public void removeTerritoryFromSet(String setName, String id) {
-        map.getSet().get(setName).removeFromSet(id);
+        if (map.getMapAsHashMap().containsKey(id) && map.getSetsAsHashMap().containsKey(setName)) {
+            map.getSetsAsHashMap().get(setName).removeFromSet(id);
+        }
     }
 
     public ArrayList<String> getTerritorySetsNames() {
         ArrayList<String> result = new ArrayList<>();
-        for (HashMap.Entry<String, TerritorySet> entry : map.getSet().entrySet()) {
+        for (HashMap.Entry<String, TerritorySet> entry : map.getSetsAsHashMap().entrySet()) {
             result.add(entry.getKey());
         }
+        result.sort(Comparator.naturalOrder());
         return result;
     }
 
     public HashMap<String, TerritorySet> getAllSets() {
-        return map.getSet();
+        return map.getSetsAsHashMap();
+    }
+
+    public String getAllSetsInfo() {
+        StringBuilder builder = new StringBuilder();
+        if (getAllSets() != null) {
+            for (Object set : getAllSets().entrySet().stream().map(entry -> entry.getValue()).toArray()) {
+                builder.append(set);
+            }
+        }
+        return builder.toString();
     }
 
     public TerritorySet getSetByName(String setName) {
-        return map.getSet().get(setName);
+        return map.getSetsAsHashMap().get(setName);
     }
 
     public void renameSet(String previousSetName, String newSetName) {
@@ -141,7 +157,7 @@ public class Service {
         return builder.toString();
     }
 
-    public String getListTitle(String title) {
+    private String getListTitle(String title) {
         return CommonLocalizator.getLocalizedText(title) + ": " + System.lineSeparator();
     }
 }

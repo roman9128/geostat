@@ -23,12 +23,12 @@ public class CommonLocalizator extends XLSXDataLoader {
     }
 
     @Override
-    protected void sendData(String[] data) {
+    protected void setData(String[] data) {
         localizedText.put(data[0], data[1]);
     }
 
     @Override
-    protected void sendTitle(String[] title) {
+    protected void setTitle(String[] title) {
         //
     }
 }
