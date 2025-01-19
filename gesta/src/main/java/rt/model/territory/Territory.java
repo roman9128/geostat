@@ -97,18 +97,6 @@ public class Territory {
         }
         this.numericData.put(dataName, dataValue);
     }
-
-    private String printNumericData() {
-        StringBuilder builder = new StringBuilder();
-        for (HashMap.Entry<String, Long> entry : numericData.entrySet()) {
-            builder.append(System.lineSeparator());
-            builder.append("\t");
-            builder.append(entry.getKey());
-            builder.append(": ");
-            builder.append(entry.getValue());
-        }
-        return builder.toString();
-    }
     // endregion
 
     // region text info
@@ -122,19 +110,6 @@ public class Territory {
         }
         this.textInfo.put(textID, textValue);
     }
-
-    private String printTextData() {
-        StringBuilder builder = new StringBuilder();
-        for (HashMap.Entry<String, String> entry : textInfo.entrySet()) {
-            builder.append(System.lineSeparator());
-            builder.append("\t");
-            builder.append(entry.getKey());
-            builder.append(": ");
-            builder.append(entry.getValue());
-        }
-        return builder.toString();
-    }
-
     // endregion
     @Override
     public String toString() {

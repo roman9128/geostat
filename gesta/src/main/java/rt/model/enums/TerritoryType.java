@@ -1,5 +1,7 @@
 package rt.model.enums;
-
+/**
+ * Виды территориальных образований
+ */
 public enum TerritoryType {
     COUNTRY,
     FEDERALDISTRICT,

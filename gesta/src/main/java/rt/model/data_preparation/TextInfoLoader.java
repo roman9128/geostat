@@ -1,12 +1,19 @@
 package rt.model.data_preparation;
 
 import rt.model.map.Map;
-
+/**
+ * Класс для загрузки текстовой информации в объекты класса Territory
+ */
 public class TextInfoLoader extends XLSXDataLoader {
 
     private Map map;
     private String[] dataNames;
 
+    /**
+     * Конструктор класса
+     * @param map объект класса Map (карта), содержащий в себе территории, информацию о которых нужно загрузить
+     * @param path путь к файлу с текстовой информацией
+     */
     public TextInfoLoader(Map map, String path) {
         this.map = map;
         loadData(path, true);
@@ -20,7 +27,12 @@ public class TextInfoLoader extends XLSXDataLoader {
     protected void setTitle(String[] title) {
         dataNames = title;
     }
-
+/*
+ * Во избежание ошибок, связанных с неполным заполнением ячеек таблицы XLSX-файла,
+ * в расчёт принимаются только данные из столбцов, имеющих заголовки, все иные данные не учитываются.
+ * Если длина массива с данными меньше длины массива с заголовками, то создаётся новый массив с данными длиной,
+ * соответствующей длине массива с заголовками.
+ */
     @Override
     protected void setData(String[] data) {
         if (dataNames.length > data.length) {
