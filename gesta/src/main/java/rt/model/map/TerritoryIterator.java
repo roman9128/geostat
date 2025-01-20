@@ -5,6 +5,9 @@ import java.util.List;
 
 import rt.model.territory.Territory;
 
+/**
+ * Итератор объектов класса Territory
+ */
 public class TerritoryIterator implements Iterator<Territory> {
 
     private int i;

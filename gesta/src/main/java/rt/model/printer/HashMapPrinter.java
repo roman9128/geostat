@@ -4,8 +4,14 @@ import java.util.HashMap;
 
 import rt.model.territory.Territory;
 
+/**
+ * Класс для оформления вывода содержимого HashMap
+ */
 public class HashMapPrinter {
 
+    /**
+     * Вывод всего содержимого
+     */
     public static <K, V> String printHashMap(HashMap<K, V> data) {
         StringBuilder builder = new StringBuilder();
         for (HashMap.Entry<K, V> entry : data.entrySet()) {
@@ -18,6 +24,9 @@ public class HashMapPrinter {
         return builder.toString();
     }
 
+    /**
+     * Вывод только информации о наименовании территорий
+     */
     public static String printTerritoryNames(HashMap<String, Territory> territories) {
         StringBuilder builder = new StringBuilder();
         for (HashMap.Entry<String, Territory> entry : territories.entrySet()) {

@@ -7,8 +7,8 @@ public class Main {
 
         Service service = new Service();
         // System.out.println(service.findByLevel(Operator.LESS, 1));
-        // System.out.println(service.chooseTerritory("RUS_CFO_ORL"));
-        System.out.println(service.getListOfSubunitsByTheirLevelOnID("RUS", 1));
+        // System.out.println(service.chooseTerritory("RUS_SFO"));
+        // System.out.println(service.getListOfSubunitsByTheirLevelOnID("RUS", 1));
         // System.out.println(service.getSortedListOfTerritoriesWithTheHighestLevel());
         // System.out.println(service.findByTerritoryType(TerritoryType.FEDERALDISTRICT));
         // System.out.println(service.findByName("Россия"));

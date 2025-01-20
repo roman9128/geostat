@@ -4,6 +4,9 @@ import java.util.Comparator;
 
 import rt.model.territory.Territory;
 
+/**
+ * Компаратор по наименованию территории
+ */
 public class ComparatorByName implements Comparator<Territory> {
 
     @Override

@@ -6,6 +6,12 @@ import rt.model.localizator.CommonLocalizator;
 import rt.model.printer.HashMapPrinter;
 import rt.model.territory.Territory;
 
+/**
+ * Класс для пользовательских подборок территорий. При её наполнении
+ * территориями происходит суммирование числовой информации входящих в неё
+ * территорий. Пересчёт данных происходит при каждом изменении состава подборки.
+ * Предполагается использование для оценки общих показателей группы территорий.
+ */
 public class TerritorySet {
 
     private String name;
@@ -16,6 +22,12 @@ public class TerritorySet {
         this.name = name;
     }
 
+    /**
+     * Добавление территории в подборку
+     *
+     * @param id идентификатор территории
+     * @param territory территория
+     */
     public void addToSet(String id, Territory territory) {
         if (territoriesInSet == null) {
             territoriesInSet = new HashMap<>();
@@ -24,11 +36,21 @@ public class TerritorySet {
         calculateNumericDataForSet(territoriesInSet);
     }
 
+    /**
+     * Удаление территории из подборки
+     *
+     * @param id идентификатор удаляемой территории
+     */
     public void removeFromSet(String id) {
         this.territoriesInSet.remove(id);
         calculateNumericDataForSet(territoriesInSet);
     }
 
+    /**
+     * Подсчёт общей числовой информации всех территорий в подборке
+     *
+     * @param territories территории подборки
+     */
     private void calculateNumericDataForSet(HashMap<String, Territory> territories) {
         HashMap<String, Long> dataToAdd = new HashMap<>();
         if (numericData == null) {
@@ -36,7 +58,7 @@ public class TerritorySet {
         }
         for (HashMap.Entry<String, Territory> territoryEntry : territories.entrySet()) {
             for (HashMap.Entry<String, Long> entry : territoryEntry.getValue().getNumericData().entrySet()) {
-                if (dataToAdd.get(entry.getKey()) == null) {
+                if (dataToAdd.get(entry.getKey()) == null) { // если какая-то информация для определённой территории отсутствует, то её значение приравниваетсяк нулю
                     dataToAdd.put(entry.getKey(), 0l);
                 }
                 dataToAdd.put(entry.getKey(), dataToAdd.get(entry.getKey()) + entry.getValue());

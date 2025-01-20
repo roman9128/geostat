@@ -6,15 +6,19 @@ import rt.model.enums.TerritoryType;
 import rt.model.localizator.CommonLocalizator;
 import rt.model.printer.HashMapPrinter;
 
+/**
+ * Класс основных объектов программы, применяемый для описания
+ * административно-территориальных единиц
+ */
 public class Territory {
 
     private String name;
     private int level;
     private TerritoryType type;
-    private HashMap<String, Territory> capital;
-    private HashMap<String, Territory> subunits;
-    private HashMap<String, Long> numericData;
-    private HashMap<String, String> textInfo;
+    private HashMap<String, Territory> capital; // столица обычно одна, HashMap используется для удобства
+    private HashMap<String, Territory> subunits; // административно-территориальные единицы, входящие в состав территории
+    private HashMap<String, Long> numericData; // числовая информация
+    private HashMap<String, String> textInfo; // текстовая информация
 
     public Territory(String name, TerritoryType type, HashMap<String, Territory> capital) {
         this.name = name;
@@ -110,6 +114,7 @@ public class Territory {
         }
         this.textInfo.put(textID, textValue);
     }
+
     // endregion
     @Override
     public String toString() {
@@ -117,7 +122,7 @@ public class Territory {
         builder.append(CommonLocalizator.getLocalizedText("NAME"))
                 .append(": ")
                 .append(name);
-        if (capital != null) {
+        if (capital.get(getCapitalID()) != null) {
             builder.append(System.lineSeparator())
                     .append(CommonLocalizator.getLocalizedText("CAPITAL"))
                     .append(": ")

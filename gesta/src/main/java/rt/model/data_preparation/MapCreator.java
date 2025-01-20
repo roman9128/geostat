@@ -174,8 +174,8 @@ public class MapCreator extends XLSXDataLoader {
             Territory territory = entry.getValue();
             if (loadedMap.getMapAsHashMap().containsKey(territory.getCapitalID())) { // проверка наличия в коллекции территории с указанным id
                 territory.setCapital(
-                    territory.getCapitalID(), // id столицы был определён ранее
-                    loadedMap.getTerritoryOnID(territory.getCapitalID()));
+                        territory.getCapitalID(), // id столицы был определён ранее
+                        loadedMap.getTerritoryOnID(territory.getCapitalID()));
             }
         }
 
