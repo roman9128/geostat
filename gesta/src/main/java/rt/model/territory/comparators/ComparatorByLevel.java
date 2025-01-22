@@ -5,7 +5,7 @@ import java.util.Comparator;
 import rt.model.territory.Territory;
 
 /**
- * Компаратор по уровню территории
+ * Компаратор по уровню территории.
  */
 public class ComparatorByLevel implements Comparator<Territory> {
 

@@ -1,10 +1,13 @@
 package rt.model;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import rt.model.data_preparation.DataPreparationService;
 import rt.model.enums.Operator;
@@ -22,11 +25,14 @@ import rt.model.territory_set.TerritorySet;
  */
 public class Service {
 
-    private final File language = new File("language.txt");
+    /**
+     * Итоговая загруженная карта
+     */
     private final Map map;
 
     public Service() {
-        new LocalizationLoader(language);
+        chooseLanguage();
+        new LocalizationLoader();
         map = new DataPreparationService().loadAndPrepareData();
     }
 
@@ -142,7 +148,7 @@ public class Service {
     }
 
     /**
-     * Поиск территории по типу
+     * Поиск территории по типу.
      *
      * @param type тип территории
      * @return Полная информация о территории кроме её структурных единиц в
@@ -165,22 +171,31 @@ public class Service {
         return printResult(map.findByLevel(operator, number));
     }
 
-    /*Поиск территорий по каким-либо числовым данным с применением условий больше, меньше или равно. */
+    /**
+     * Поиск территорий по каким-либо числовым данным с применением условий
+     * больше, меньше или равно.
+     */
     public String findByParameter(String dataName, Operator operator, long number) {
         return printResult(map.findByParameter(dataName, operator, number));
     }
 
-    /*Поиск территорий по каким-либо числовым данным в пределах заданного пользователем диапазона */
+    /**
+     * Поиск территорий по каким-либо числовым данным в пределах заданного
+     * пользователем диапазона.
+     */
     public String findByParameterWithinInterval(String dataName, long number1, long number2) {
         return printResult(map.findByParameterWithinInterval(dataName, number1, number2));
     }
 
-    /*Выбрать территорию по id */
+    /**
+     * Выбрать территорию по id.
+     */
     public Territory chooseTerritory(String id) {
         return map.getTerritoryOnID(id);
     }
 
-    /* Получение списка всех территорий, имеющих самый высокий уровень на карте
+    /**
+     * Получение списка всех территорий, имеющих самый высокий уровень на карте.
      */
     public String getListOfTerritoriesWithTheHighestLevelOnMap() {
         StringBuilder builder = new StringBuilder();
@@ -218,7 +233,9 @@ public class Service {
         return builder.toString();
     }
 
-    /* Подготовка списка структурных единиц территории */
+    /**
+     * Подготовка списка структурных единиц территории.
+     */
     private String getListOfSubunits(Territory territory, int depth, int requiredDepth) {
         if (territory.getSubunits() == null) {
             return "";
@@ -237,7 +254,9 @@ public class Service {
         return builder.toString();
     }
 
-    /* Формирование строки с информацией о территориях */
+    /**
+     * Формирование строки с информацией о территориях.
+     */
     private String printResult(List<Territory> result) {
         StringBuilder builder = new StringBuilder();
         builder.append(getListTitle("RESULT"));
@@ -259,5 +278,36 @@ public class Service {
      */
     private String getListTitle(String title) {
         return CommonLocalizator.getLocalizedText(title) + ": " + System.lineSeparator();
+    }
+
+    /**
+     * Метод выбора одного из доступных языков. Временное решение.
+     */
+    private void chooseLanguage() {
+        File language = new File("language.txt");
+        String previousLanguage = "";
+        try (Scanner fileScanner = new Scanner(language)) {
+            previousLanguage = fileScanner.nextLine();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+        if (previousLanguage.isEmpty() || !language.exists()) {
+            Scanner consoleScanner = new Scanner(System.in);
+            ArrayList<String> languages = new ArrayList<>();
+            languages.add("rus");
+            languages.add("eng");
+            System.out.println("Choose one of available languages / Выберите один из доступных языков");
+            for (String string : languages) {
+                System.out.println(string);
+            }
+            String choice = consoleScanner.nextLine();
+            try (FileWriter fileWriter = new FileWriter(language, false)) {
+                fileWriter.write(choice);
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            } finally {
+                consoleScanner.close();
+            }
+        }
     }
 }

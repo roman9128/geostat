@@ -12,9 +12,9 @@ import rt.model.printer.HashMapPrinter;
  */
 public class Territory {
 
-    private String name;
-    private int level;
-    private TerritoryType type;
+    private String name; // наименование территории
+    private int level; // уровень территории
+    private TerritoryType type; // тип территории из соответствующего enum
     private HashMap<String, Territory> capital; // столица обычно одна, HashMap используется для удобства
     private HashMap<String, Territory> subunits; // административно-территориальные единицы, входящие в состав территории
     private HashMap<String, Long> numericData; // числовая информация

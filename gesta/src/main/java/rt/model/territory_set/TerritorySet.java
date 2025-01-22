@@ -14,16 +14,16 @@ import rt.model.territory.Territory;
  */
 public class TerritorySet {
 
-    private String name;
-    private HashMap<String, Territory> territoriesInSet;
-    private HashMap<String, Long> numericData;
+    private String name; // наименование подборки
+    private HashMap<String, Territory> territoriesInSet; // коллекция территорий в подборке
+    private HashMap<String, Long> numericData; // общие числовые показатели территорий
 
     public TerritorySet(String name) {
         this.name = name;
     }
 
     /**
-     * Добавление территории в подборку
+     * Добавление территории в подборку.
      *
      * @param id идентификатор территории
      * @param territory территория
@@ -37,7 +37,7 @@ public class TerritorySet {
     }
 
     /**
-     * Удаление территории из подборки
+     * Удаление территории из подборки.
      *
      * @param id идентификатор удаляемой территории
      */
@@ -47,7 +47,7 @@ public class TerritorySet {
     }
 
     /**
-     * Подсчёт общей числовой информации всех территорий в подборке
+     * Подсчёт общей числовой информации всех территорий в подборке.
      *
      * @param territories территории подборки
      */

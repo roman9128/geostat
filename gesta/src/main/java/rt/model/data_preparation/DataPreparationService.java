@@ -8,6 +8,9 @@ import rt.model.map.Map;
  */
 public final class DataPreparationService {
 
+    /**
+     * Карта с загруженной информацией.
+     */
     private Map loadedMap;
     private final String ID_TYPE_CAPITAL = "bd.xlsx";
     private final String NUMERICAL_INFO = "nd.xlsx";
@@ -16,7 +19,7 @@ public final class DataPreparationService {
 
     /**
      * Конструктор запускает процесс загрузки и подготовки данных сразу же при
-     * создании объекта данного класса
+     * создании объекта данного класса.
      */
     public DataPreparationService() {
         loadAndPrepareData();
@@ -24,7 +27,7 @@ public final class DataPreparationService {
 
     /**
      * Метод для загрузки данных разных типов из соответствующих файлов,
-     * создания карты и отправки её
+     * создания карты и отправки её.
      *
      * @return объект класса Map (карта с территориями)
      */
@@ -38,14 +41,14 @@ public final class DataPreparationService {
 
     /**
      * Метод загрузки основной информации, необходимой для создания объектов
-     * класса Territory
+     * класса Territory.
      */
     private void addBasicInfoToMap() {
         loadedMap = new MapCreator(ID_TYPE_CAPITAL).sendMap();
     }
 
     /**
-     * Метод загрузки числовой информации, относящейся к конкретной территории
+     * Метод загрузки числовой информации, относящейся к конкретной территории.
      */
     private void addNumericalInfo() {
         loadedMap = new NumericInfoLoader(loadedMap, NUMERICAL_INFO).sendMap();
@@ -56,7 +59,7 @@ public final class DataPreparationService {
     }
 
     /**
-     * Метод загрузки текстовой информации, относящейся к конкретной территории
+     * Метод загрузки текстовой информации, относящейся к конкретной территории.
      */
     private void addTextInfo() {
         loadedMap = new TextInfoLoader(loadedMap, TEXT_INFO).sendMap();

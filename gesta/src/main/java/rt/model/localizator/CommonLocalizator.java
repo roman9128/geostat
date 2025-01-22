@@ -12,12 +12,16 @@ import rt.model.data_preparation.XLSXDataLoader;
  */
 public class CommonLocalizator extends XLSXDataLoader {
 
+    /**
+     * Хранилище для переведённого текста. Ключ - id текста, значение - сам
+     * текст на выбранном языке.
+     */
     private static HashMap<String, String> localizedText;
 
     /**
      * Конструктор, который вызывает методы загрузки данных из XLSX-файлов:
      * первый файл с наименованиями территорий, второй - с программным служебным
-     * текстом
+     * текстом.
      *
      * @param language выбранный язык
      */
@@ -42,6 +46,9 @@ public class CommonLocalizator extends XLSXDataLoader {
         }
     }
 
+    /**
+     * Запись полученной информации localizedText.
+     */
     @Override
     protected void setData(String[] data) {
         localizedText.put(data[0], data[1]);

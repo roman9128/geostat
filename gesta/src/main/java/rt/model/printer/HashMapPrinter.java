@@ -5,12 +5,12 @@ import java.util.HashMap;
 import rt.model.territory.Territory;
 
 /**
- * Класс для оформления вывода содержимого HashMap
+ * Класс для оформления вывода содержимого HashMap.
  */
 public class HashMapPrinter {
 
     /**
-     * Вывод всего содержимого
+     * Вывод всего содержимого.
      */
     public static <K, V> String printHashMap(HashMap<K, V> data) {
         StringBuilder builder = new StringBuilder();
@@ -25,7 +25,7 @@ public class HashMapPrinter {
     }
 
     /**
-     * Вывод только информации о наименовании территорий
+     * Вывод только информации о наименовании территорий.
      */
     public static String printTerritoryNames(HashMap<String, Territory> territories) {
         StringBuilder builder = new StringBuilder();

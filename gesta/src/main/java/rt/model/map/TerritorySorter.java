@@ -10,15 +10,25 @@ import rt.model.territory.comparators.ComparatorByName;
 
 /**
  * Класс для сортировки объектов класса Territory по имени и с учётом уровня с
- * занесением их в список
+ * занесением их в список.
  */
 public class TerritorySorter {
 
+    /**
+     * Список отсортированных территорий.
+     */
     private List<Territory> sortedTerritories;
 
     public TerritorySorter() {
     }
 
+    /**
+     * Метод, принимающий HashMap с объектами класса Territory и возвращающий
+     * отсортированный по имени список этих объектов.
+     *
+     * @param territoriesToSort HashMap
+     * @return List<Territory>
+     */
     public List<Territory> sortTerritories(HashMap<String, Territory> territoriesToSort) {
         sortedTerritories = new ArrayList<>();
         mapToList(territoriesToSort);
@@ -27,7 +37,7 @@ public class TerritorySorter {
     }
 
     /**
-     * Сортировка по имени
+     * Сортировка по имени.
      */
     private void sortByName() {
         sortedTerritories.sort(new ComparatorByName());
